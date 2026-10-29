@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="id">
+
+<!--
+  TEMPLATE HALAMAN PROYEK
+  Untuk proyek baru: salin file ini jadi projects/nama-proyek.html, lalu ganti
+  judul, fakta, media, dan cerita. Video: pakai iframe YouTube (contoh di bawah).
+-->
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ruhul OS | Ruhul Ikram</title>
+  <meta name="description"
+    content="Studi kasus Ruhul OS: portofolio berbentuk meja kerja interaktif, dibangun tanpa framework." />
+  <meta name="theme-color" content="#1d5a43" />
+  <link rel="canonical" href="https://ruhulikram.github.io/porto-ruhul/projects/ruhul-os.html" />
+  <link rel="preload" href="../assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="icon" type="image/webp" href="../assets/images/folder-ui/stamp.webp" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">Lewati ke konten</a>
+  <div class="site-noise" aria-hidden="true"></div>
+
+  <header class="site-header" id="siteHeader">
+    <nav class="snote-stack" aria-label="Navigasi utama">
+      <a class="snote-link snote-link--identity" href="../index.html">
+        <img src="../assets/images/snote/snote-1.webp" alt="" width="488" height="172" />
+        <span class="snote-label">Ruhul Ikram</span>
+      </a>
+      <a class="snote-link snote-link--journey" href="../index.html#proyek">
+        <img src="../assets/images/snote/snote-2.webp" alt="" width="544" height="147" />
+        <span class="snote-label">Proyek</span>
+      </a>
+      <a class="snote-link snote-link--work" href="../index.html#mengajar">
+        <img src="../assets/images/snote/snote-3.webp" alt="" width="600" height="125" />
+        <span class="snote-label">Mengajar</span>
+      </a>
+      <a class="snote-link snote-link--contact" href="../index.html#kontak">
+        <img src="../assets/images/snote/snote-4.webp" alt="" width="599" height="128" />
+        <span class="snote-label">Kontak</span>
+      </a>
+    </nav>
+  </header>
+
+  <main id="main-content" class="case">
+    <div class="container">
+      <a class="case-back" href="../index.html#proyek">Kembali ke semua proyek</a>
+
+      <h1 class="case-title">Ruhul OS</h1>
+      <p class="case-lead">
+        Portofolio yang dibuat seperti meja kerja: map, berkas, sticky note, dan
+        kupu-kupu kertas di atas cutting mat. Dibangun tanpa framework supaya
+        ringan dan mudah dirawat.
+      </p>
+
+      <dl class="case-facts">
+        <div>
+          <dt>Peran</dt>
+          <dd>Desain, pengembangan, pengujian</dd>
+        </div>
+        <div>
+          <dt>Tahun</dt>
+          <dd>2026</dd>
+        </div>
+        <div>
+          <dt>Teknologi</dt>
+          <dd>HTML, CSS, JavaScript, GSAP</dd>
+        </div>
+        <div>
+          <dt>Bantuan AI</dt>
+          <dd>Claude untuk refactor dan review kode</dd>
+        </div>
+      </dl>
+
+      <!-- Video showcase. Ganti <img> dengan iframe YouTube, contoh:
+      <iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID" title="Video showcase Ruhul OS"
+        allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      -->
+      <figure class="case-media">
+        <img src="../assets/images/projects/ruhul-os.jpg" alt="Beranda Ruhul OS dengan map interaktif di atas cutting mat"
+          width="1440" height="900" />
+        <figcaption>Beranda: map berisi berkas yang membuka setiap bagian portofolio.</figcaption>
+      </figure>
+
+      <!-- Mockup tambahan: salin <figure> di bawah sesuai kebutuhan. -->
+      <div class="case-gallery">
+        <figure class="case-media">
+          <img src="../assets/images/projects/photo-utama.webp" alt="Ilustrasi karakter karya Ruhul Ikram" width="1200"
+            height="1200" loading="lazy" />
+          <figcaption>Aset ilustrasi digambar sendiri.</figcaption>
+        </figure>
+        <figure class="case-media">
+          <img src="../assets/images/folder-ui/folder-front.webp" alt="Aset map yang dipakai di beranda" width="892"
+            height="626" loading="lazy" />
+          <figcaption>Aset map dibuat berlapis supaya berkas bisa keluar-masuk.</figcaption>
+        </figure>
+      </div>
+
+      <article class="case-story">
+        <h2>Masalah</h2>
+        <p>
+          Portofolio developer biasanya terlihat sama: daftar skill, grid kartu,
+          tombol kontak. Saya ingin pengunjung penasaran dan mau menjelajah,
+          tanpa mengorbankan kecepatan dan aksesibilitas.
+        </p>
+
+        <h2>Proses</h2>
+        <ul>
+          <li>Menentukan satu tema, meja kerja di atas cutting mat, supaya setiap bagian terasa satu dunia.</li>
+          <li>Membuat aset map, berkas, dan sticky note berlapis agar bisa dianimasikan.</li>
+          <li>Menulis HTML semantik dan CSS tanpa framework, lalu menambahkan GSAP hanya untuk satu momen animasi.</li>
+          <li>Menguji di desktop dan mobile, termasuk mode reduced motion.</li>
+        </ul>
+
+        <h2>Hasil</h2>
+        <p>
+          Situs statis tanpa build step yang bisa langsung di-host di GitHub
+          Pages, dan tetap berfungsi penuh walau animasi dimatikan.
+        </p>
+
+        <div class="case-actions">
+          <a class="button button--primary" href="https://github.com/ruhulikram/porto-ruhul" target="_blank"
+            rel="noopener noreferrer">Lihat kode di GitHub</a>
+          <a class="button button--ghost-ink" href="../index.html#kontak">Hubungi saya</a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <p>&copy; 2026 Ruhul Ikram, Bogor, Indonesia</p>
+      <a href="../index.html">Kembali ke beranda</a>
+    </div>
+  </footer>
+</body>
+
+</html>
