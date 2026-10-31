@@ -6,18 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ruhul Ikram | Product Developer &amp; Educator</title>
   <meta name="description"
-    content="Portofolio Ruhul Ikram, product developer dan pengajar dari Bogor. Membangun produk digital dengan bantuan AI, dari analisa sampai rilis." />
+    content="Portofolio Ruhul Ikram, product developer dan pengajar dari Tangerang. Membangun produk digital dengan bantuan AI, dari analisa sampai rilis." />
   <meta name="theme-color" content="#1d5a43" />
   <meta property="og:title" content="Ruhul Ikram | Product Developer &amp; Educator" />
   <meta property="og:description"
     content="Saya membangun produk digital dengan bantuan AI, dan mengajarkan cara membuatnya." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ruhulikram.github.io/porto-ruhul/" />
-  <meta property="og:image"
-    content="https://ruhulikram.github.io/porto-ruhul/assets/images/projects/photo-utama-og.jpg" />
+  <meta property="og:image" content="https://ruhulikram.github.io/porto-ruhul/assets/images/projects/ruhul-os.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="canonical" href="https://ruhulikram.github.io/porto-ruhul/" />
   <link rel="preload" href="assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/webp" href="assets/images/folder-ui/stamp.webp" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -26,338 +28,408 @@
   <a class="skip-link" href="#main-content">Lewati ke konten</a>
   <div class="site-noise" aria-hidden="true"></div>
 
+  <!-- Masking-tape labels stuck along the top edge of the mat -->
   <header class="site-header" id="siteHeader">
-    <nav class="snote-stack" aria-label="Navigasi utama">
-      <a class="snote-link snote-link--identity nav-link" href="#home">
-        <img src="assets/images/snote/snote-1.webp" alt="" width="488" height="172" />
-        <span class="snote-label">Ruhul Ikram</span>
+    <nav class="tape-nav" aria-label="Navigasi utama">
+      <a class="tape-link tape-link--identity nav-link" href="#home">
+        <img src="assets/images/folder-ui/stamp.webp" alt="" width="262" height="299" />
+        <span class="tape-text">Ruhul Ikram</span>
       </a>
-      <a class="snote-link snote-link--journey nav-link" href="#proyek">
-        <img src="assets/images/snote/snote-2.webp" alt="" width="544" height="147" />
-        <span class="snote-label">Proyek</span>
-      </a>
-      <a class="snote-link snote-link--work nav-link" href="#mengajar">
-        <img src="assets/images/snote/snote-3.webp" alt="" width="600" height="125" />
-        <span class="snote-label">Mengajar</span>
-      </a>
-      <a class="snote-link snote-link--contact nav-link" href="#kontak">
-        <img src="assets/images/snote/snote-4.webp" alt="" width="599" height="128" />
-        <span class="snote-label">Kontak</span>
-      </a>
+      <a class="tape-link nav-link" href="#proyek">Proyek</a>
+      <a class="tape-link nav-link" href="#mengajar">Mengajar</a>
+      <a class="tape-link tape-link--yellow nav-link" href="#kontak">Kontak</a>
     </nav>
   </header>
 
-  <main id="main-content">
-    <section class="hero" id="home" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <h1 id="hero-title">
-          <span class="hero-name">Ruhul Ikram</span>
-          Product Developer &amp; Educator
-        </h1>
-        <p class="hero-lead">
-          Saya membangun produk digital dengan bantuan AI, dari analisa,
-          menulis kode, sampai pengujian, dan mengajarkan cara membuatnya.
-        </p>
-        <div class="hero-actions">
-          <a class="button button--primary" href="https://www.linkedin.com/in/ruhul-ikram/" target="_blank"
-            rel="noopener noreferrer">Lihat LinkedIn</a>
-          <a class="button button--ghost" href="#proyek">Buka proyek</a>
-        </div>
-      </div>
+  <div id="smooth-wrapper">
+    <div id="smooth-content" class="mat">
+      <main id="main-content">
+        <section class="hero" id="home" aria-labelledby="hero-title">
+          <img class="desk-prop prop-keyboard" src="assets/images/desk/keyboard-mechanical.webp" alt="" width="1500"
+            height="540" data-speed="0.85" />
+          <img class="desk-prop desk-prop--drag prop-pencil keep-mobile" src="assets/images/desk/pencil-yellow.webp"
+            alt="" width="1100" height="105" />
+          <img class="desk-prop prop-shaving" src="assets/images/desk/pencil-shaving.webp" alt="" width="460"
+            height="373" data-speed="1.05" />
+          <img class="desk-prop desk-prop--drag prop-eraser" src="assets/images/desk/eraser.webp" alt="" width="520"
+            height="187" />
 
-      <div class="folder-stage" id="folderStage">
-        <div class="folder-asset" id="mainFolder">
-          <img src="assets/images/folder-ui/folder-back.webp" alt="" class="folder-layer folder-back-img"
-            draggable="false" width="855" height="596" />
-
-          <div class="folder-files-layer">
-            <div class="asset-file file-empty" aria-hidden="true">
-              <img src="assets/images/folder-ui/file-empty.webp" alt="" draggable="false" width="531" height="574" />
-            </div>
-
-            <a class="asset-file file-interactive file-work" href="#perjalanan">
-              <img src="assets/images/folder-ui/file-work.webp" alt="" draggable="false" width="736" height="399" />
-              <span class="file-bubble"><strong>Perjalanan</strong><small>Kerja &amp; studi</small></span>
-            </a>
-
-            <a class="asset-file file-interactive file-studies" href="#mengajar">
-              <img src="assets/images/folder-ui/file-studies.webp" alt="" draggable="false" width="410"
-                height="476" />
-              <span class="file-bubble"><strong>Mengajar</strong><small>Kelas &amp; mentoring</small></span>
-            </a>
-
-            <a class="asset-file file-interactive file-project" href="#proyek">
-              <img src="assets/images/folder-ui/file-project.webp" alt="" draggable="false" width="410"
-                height="476" />
-              <span class="file-bubble"><strong>Proyek</strong><small>Studi kasus</small></span>
-            </a>
-          </div>
-
-          <img src="assets/images/folder-ui/folder-front.webp" alt="" class="folder-layer folder-front-img"
-            draggable="false" width="892" height="626" />
-          <div class="stamp-layer">
-            <img src="assets/images/folder-ui/stamp.webp" alt="Foto Ruhul Ikram" class="stamp-img" draggable="false"
-              width="262" height="299" />
-          </div>
-          <p class="folder-label" aria-hidden="true">Portofolio<br />Bogor, 2026</p>
-        </div>
-      </div>
-
-      <div class="paper-butterfly paper-butterfly--primary" data-butterfly data-flight="primary" aria-hidden="true">
-        <span class="paper-butterfly__shadow"></span>
-        <span class="paper-butterfly__form">
-          <img class="paper-butterfly__wing paper-butterfly__wing--left"
-            src="assets/images/butterfly/butterfly-wings-left.webp" alt="" draggable="false" width="1162"
-            height="1232" />
-          <img class="paper-butterfly__wing paper-butterfly__wing--right"
-            src="assets/images/butterfly/butterfly-wings-right.webp" alt="" draggable="false" width="1162"
-            height="1232" />
-          <img class="paper-butterfly__body" src="assets/images/butterfly/butterfly-1.webp" alt="" draggable="false"
-            width="450" height="820" />
-        </span>
-      </div>
-
-      <div class="paper-butterfly paper-butterfly--drift" data-butterfly data-flight="drift" aria-hidden="true">
-        <span class="paper-butterfly__shadow"></span>
-        <span class="paper-butterfly__form">
-          <img class="paper-butterfly__wing paper-butterfly__wing--left"
-            src="assets/images/butterfly/butterfly-wings-left.webp" alt="" draggable="false" width="1162"
-            height="1232" />
-          <img class="paper-butterfly__wing paper-butterfly__wing--right"
-            src="assets/images/butterfly/butterfly-wings-right.webp" alt="" draggable="false" width="1162"
-            height="1232" />
-          <img class="paper-butterfly__body" src="assets/images/butterfly/butterfly-1.webp" alt="" draggable="false"
-            width="450" height="820" />
-        </span>
-      </div>
-
-      <div class="paper-butterfly paper-butterfly--dart" data-butterfly data-flight="dart" aria-hidden="true">
-        <span class="paper-butterfly__shadow"></span>
-        <span class="paper-butterfly__form">
-          <img class="paper-butterfly__wing paper-butterfly__wing--left"
-            src="assets/images/butterfly/butterfly-wings-left.webp" alt="" draggable="false" width="1162"
-            height="1232" />
-          <img class="paper-butterfly__wing paper-butterfly__wing--right"
-            src="assets/images/butterfly/butterfly-wings-right.webp" alt="" draggable="false" width="1162"
-            height="1232" />
-          <img class="paper-butterfly__body" src="assets/images/butterfly/butterfly-1.webp" alt="" draggable="false"
-            width="450" height="820" />
-        </span>
-      </div>
-    </section>
-
-    <section class="section" id="proses" aria-labelledby="proses-title">
-      <div class="container">
-        <header class="section-head">
-          <h2 id="proses-title">Dari masalah sampai rilis</h2>
-          <p>
-            Saya tidak berhenti di menulis kode. Saya ikut menganalisa
-            kebutuhan, memimpin tim kecil, dan memastikan produknya benar-benar
-            jalan. AI mempercepat pekerjaan saya, keputusan tetap di tangan
-            saya.
-          </p>
-        </header>
-
-        <ol class="process">
-          <li class="process-note process-note--yellow">
-            <h3>Analisa</h3>
-            <p>Bicara dengan pengguna, memetakan masalah, menentukan apa yang perlu dibangun lebih dulu.</p>
-          </li>
-          <li class="process-note process-note--green">
-            <h3>Rancang &amp; bangun</h3>
-            <p>Mendesain alur, lalu menulis kode bersama AI agar prototipe cepat sampai ke tangan pengguna.</p>
-          </li>
-          <li class="process-note process-note--coral">
-            <h3>Uji</h3>
-            <p>Menguji fitur, mencari bug, dan memastikan hasilnya bekerja di perangkat nyata.</p>
-          </li>
-          <li class="process-note process-note--lavender">
-            <h3>Rilis &amp; pimpin</h3>
-            <p>Mengatur pembagian kerja tim, merilis, lalu belajar dari data dan masukan pengguna.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <section class="section" id="proyek" aria-labelledby="proyek-title">
-      <div class="container">
-        <header class="section-head">
-          <h2 id="proyek-title">Proyek</h2>
-          <p>Setiap map berisi cerita lengkapnya: masalah, proses, video, dan hasilnya.</p>
-        </header>
-
-        <div class="project-grid">
-          <a class="project-folder project-folder--featured" href="projects/ruhul-os.html">
-            <span class="project-tab">Web, 2026</span>
-            <span class="project-sheet">
-              <img src="assets/images/projects/ruhul-os.jpg" alt="Tampilan beranda portofolio Ruhul Ikram"
-                loading="lazy" width="1440" height="900" />
-            </span>
-            <span class="project-body">
-              <h3>Ruhul OS</h3>
-              <p>Portofolio ini sendiri: meja kerja interaktif yang dibangun tanpa framework, dengan HTML, CSS, dan
-                GSAP.</p>
-              <span class="project-meta">
-                <span class="tags"><span>HTML</span><span>CSS</span><span>GSAP</span></span>
-                <span class="project-open">Buka studi kasus</span>
-              </span>
-            </span>
-          </a>
-
-          <!-- GANTI: ubah <div> jadi <a href="projects/nama-proyek.html"> setelah halaman proyeknya dibuat. -->
-          <div class="project-folder is-pending">
-            <span class="project-tab">Ed-tech</span>
-            <span class="project-sheet project-sheet--empty"><span>Mockup menyusul</span></span>
-            <span class="project-body">
-              <h3>Proyek berikutnya</h3>
-              <p>Studi kasus sedang disiapkan.</p>
-              <span class="project-meta"><span class="project-open">Segera</span></span>
-            </span>
-          </div>
-
-          <!-- GANTI: sama seperti di atas. -->
-          <div class="project-folder is-pending">
-            <span class="project-tab">Produk</span>
-            <span class="project-sheet project-sheet--empty"><span>Mockup menyusul</span></span>
-            <span class="project-body">
-              <h3>Proyek berikutnya</h3>
-              <p>Studi kasus sedang disiapkan.</p>
-              <span class="project-meta"><span class="project-open">Segera</span></span>
-            </span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="mengajar" aria-labelledby="mengajar-title">
-      <div class="container teach">
-        <div class="teach-copy">
-          <header class="section-head">
-            <h2 id="mengajar-title">Mengajar &amp; mentoring</h2>
-            <p>
-              Mengajar membuat saya terbiasa menjelaskan hal rumit dengan
-              sederhana. Kemampuan itu sekarang saya bawa ke produk ed-tech dan
-              ke tim yang saya pimpin.
+          <div class="hero-copy">
+            <h1 id="hero-title">
+              <span class="hero-name">Ruhul Ikram</span>
+              <span class="hero-role">Product Developer &amp; Educator</span>
+            </h1>
+            <p class="hero-lead">
+              Saya membangun produk digital dengan bantuan AI, dari analisa,
+              menulis kode, sampai pengujian, dan mengajarkan cara membuatnya.
             </p>
-          </header>
-
-          <!-- GANTI: tambahkan kegiatan mengajar/mentoring lain dengan pola <li> yang sama. -->
-          <ul class="index-card">
-            <li>
-              <strong>Guru Simulasi Digital</strong>
-              <span>SMK YASTRIF 2, 2023</span>
-            </li>
-            <li>
-              <strong>Gambar Teknik Otomotif</strong>
-              <span>SMK YASTRIF 2, 2023</span>
-            </li>
-            <li class="is-placeholder">
-              <strong>Kegiatan mentoring</strong>
-              <span>Tempat, tahun</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- GANTI: isi <span class="polaroid-photo"> dengan <img src="assets/images/teaching/...webp" alt="..." />.
-             Hindari wajah siswa di bawah umur tanpa izin. -->
-        <div class="polaroids" aria-label="Foto kegiatan">
-          <figure class="polaroid">
-            <span class="polaroid-photo"></span>
-            <figcaption>Di kelas</figcaption>
-          </figure>
-          <figure class="polaroid">
-            <span class="polaroid-photo"></span>
-            <figcaption>Sesi mentoring</figcaption>
-          </figure>
-          <figure class="polaroid">
-            <span class="polaroid-photo"></span>
-            <figcaption>Workshop</figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="perjalanan" aria-labelledby="perjalanan-title">
-      <div class="container">
-        <header class="section-head">
-          <h2 id="perjalanan-title">Perjalanan</h2>
-          <p>Jalan saya tidak lurus: kelas, ruang redaksi, lalu produk. Masing-masing mengasah cara saya bekerja.</p>
-        </header>
-
-        <ol class="ruler">
-          <li class="ruler-item">
-            <time datetime="2026-03">2026 – sekarang</time>
-            <div class="slip">
-              <h3>Social Media Manager</h3>
-              <p class="slip-org">Sekolah Prestasi Global, Depok</p>
-              <p>Menyusun strategi konten dan sistem publikasi untuk brand sekolah.</p>
+            <div class="hero-actions">
+              <a class="button button--primary" href="https://www.linkedin.com/in/ruhul-ikram/" target="_blank"
+                rel="noopener noreferrer">Lihat LinkedIn</a>
+              <a class="button button--ghost" href="#proyek">Buka proyek</a>
             </div>
-          </li>
-          <li class="ruler-item">
-            <time datetime="2023-09">2023 – 2026</time>
-            <div class="slip">
-              <h3>Content Editor</h3>
-              <p class="slip-org">MileniaNews, Jakarta Selatan</p>
-              <p>Menyunting berita, mendesain konten sosial, dan sempat menjadi host podcast.</p>
+          </div>
+
+          <div class="folder-stage" id="folderStage">
+            <div class="chalk-note chalk-note--hero" aria-hidden="true">
+              <span>buka salah satu berkas</span>
+              <svg viewBox="0 0 120 90">
+                <path class="chalk" d="M10 8 C 60 6, 96 26, 92 74" />
+                <path class="chalk" d="M80 62 L 92 76 L 102 60" />
+              </svg>
             </div>
-          </li>
-          <li class="ruler-item">
-            <time datetime="2023-07">2023</time>
-            <div class="slip">
-              <h3>Guru SMK</h3>
-              <p class="slip-org">SMK YASTRIF 2</p>
-              <p>Mengajar simulasi digital dan gambar teknik, menyusun RPP, dan mengevaluasi siswa.</p>
+
+            <div class="folder-asset" id="mainFolder">
+              <img src="assets/images/folder-ui/folder-back.webp" alt="" class="folder-layer folder-back-img"
+                draggable="false" width="855" height="596" />
+
+              <div class="folder-files-layer">
+                <div class="asset-file file-empty" aria-hidden="true">
+                  <img src="assets/images/folder-ui/file-empty.webp" alt="" draggable="false" width="531"
+                    height="574" />
+                </div>
+
+                <a class="asset-file file-interactive file-work" href="#perjalanan">
+                  <img src="assets/images/folder-ui/file-work.webp" alt="" draggable="false" width="736" height="399" />
+                  <span class="file-bubble"><strong>Perjalanan</strong><small>Kerja &amp; studi</small></span>
+                </a>
+
+                <a class="asset-file file-interactive file-studies" href="#mengajar">
+                  <img src="assets/images/folder-ui/file-studies.webp" alt="" draggable="false" width="410"
+                    height="476" />
+                  <span class="file-bubble"><strong>Mengajar</strong><small>Kelas &amp; mentoring</small></span>
+                </a>
+
+                <a class="asset-file file-interactive file-project" href="#proyek">
+                  <img src="assets/images/folder-ui/file-project.webp" alt="" draggable="false" width="410"
+                    height="476" />
+                  <span class="file-bubble"><strong>Proyek</strong><small>Studi kasus</small></span>
+                </a>
+              </div>
+
+              <img src="assets/images/folder-ui/folder-front.webp" alt="" class="folder-layer folder-front-img"
+                draggable="false" width="892" height="626" />
+              <div class="stamp-layer">
+                <img src="assets/images/folder-ui/stamp.webp" alt="Foto Ruhul Ikram" class="stamp-img" draggable="false"
+                  width="262" height="299" />
+              </div>
+              <p class="folder-label" aria-hidden="true">Portofolio<br />Tangerang, 2026</p>
             </div>
-          </li>
-          <li class="ruler-item">
-            <time datetime="2022-09">2022 – 2026</time>
-            <div class="slip">
-              <h3>S1 Teknologi Informasi</h3>
-              <p class="slip-org">Universitas Bina Sarana Informatika</p>
-              <p>Fokus pada pengembangan software, analisa program, dan web.</p>
-              <ul class="tags">
-                <li>MTCNA</li>
-                <li>PCAP Python</li>
-                <li>Analis Program</li>
+          </div>
+
+
+        </section>
+
+        <section class="section" id="proses" aria-labelledby="proses-title">
+          <img class="desk-prop prop-triangle" src="assets/images/desk/ruler-triangle.webp" alt="" width="760"
+            height="638" data-speed="1.15" />
+          <img class="desk-prop prop-clips" src="assets/images/desk/paperclips-pile.webp" alt="" width="504"
+            height="560" data-speed="0.9" />
+
+          <div class="container">
+            <header class="section-head">
+              <h2 id="proses-title">Dari masalah sampai rilis</h2>
+              <p>
+                Saya tidak berhenti di menulis kode. Saya ikut menganalisa
+                kebutuhan, memimpin tim kecil, dan memastikan produknya
+                benar-benar jalan. AI mempercepat pekerjaan saya, keputusan tetap
+                di tangan saya.
+              </p>
+            </header>
+
+            <div class="process-board">
+              <svg class="process-arrows" viewBox="0 0 1000 80" preserveAspectRatio="none" aria-hidden="true">
+                <path class="chalk" d="M150 70 C 200 8, 300 8, 352 62" />
+                <path class="chalk" d="M338 50 L 352 64 L 360 46" />
+                <path class="chalk" d="M400 70 C 450 8, 550 8, 602 62" />
+                <path class="chalk" d="M588 50 L 602 64 L 610 46" />
+                <path class="chalk" d="M650 70 C 700 8, 800 8, 852 62" />
+                <path class="chalk" d="M838 50 L 852 64 L 860 46" />
+              </svg>
+
+              <ol class="process">
+                <li class="process-note process-note--yellow">
+                  <img class="pin" src="assets/images/desk/pushpin-red-top.webp" alt="" width="113" height="140" />
+                  <h3>Analisa</h3>
+                  <p>Bicara dengan pengguna, memetakan masalah, menentukan apa yang perlu dibangun lebih dulu.</p>
+                </li>
+                <li class="process-note process-note--green">
+                  <img class="pin" src="assets/images/desk/pushpin-red-top.webp" alt="" width="113" height="140" />
+                  <h3>Rancang &amp; bangun</h3>
+                  <p>Mendesain alur, lalu menulis kode bersama AI agar prototipe cepat sampai ke tangan pengguna.</p>
+                </li>
+                <li class="process-note process-note--coral">
+                  <img class="pin" src="assets/images/desk/pushpin-red-top.webp" alt="" width="113" height="140" />
+                  <h3>Uji</h3>
+                  <p>Menguji fitur, mencari bug, dan memastikan hasilnya bekerja di perangkat nyata.</p>
+                </li>
+                <li class="process-note process-note--lavender">
+                  <img class="pin" src="assets/images/desk/pushpin-red-top.webp" alt="" width="113" height="140" />
+                  <h3>Rilis &amp; pimpin</h3>
+                  <p>Mengatur pembagian kerja tim, merilis, lalu belajar dari data dan masukan pengguna.</p>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <section class="section section--projects" id="proyek" aria-labelledby="proyek-title">
+          <img class="desk-prop prop-macbook" src="assets/images/desk/macbook.webp" alt="" width="1400" height="911"
+            data-speed="0.9" />
+          <img class="desk-prop prop-ruler" src="assets/images/desk/ruler-steel.webp" alt="" width="1800" height="198"
+            data-speed="1.08" />
+
+          <div class="container">
+            <header class="section-head">
+              <h2 id="proyek-title">Proyek</h2>
+              <p>Setiap map berisi cerita lengkapnya: masalah, proses, video, dan hasilnya.</p>
+            </header>
+          </div>
+
+          <div class="project-viewport">
+            <div class="project-track">
+              <a class="project-card" href="projects/ruhul-os.html">
+                <img class="binder-clip" src="assets/images/desk/clip-binder-black.webp" alt="" width="228"
+                  height="300" />
+                <span class="project-print">
+                  <img src="assets/images/projects/ruhul-os.jpg" alt="Tampilan beranda portofolio Ruhul Ikram"
+                    loading="lazy" width="1440" height="900" />
+                </span>
+                <span class="project-kind">Web, 2026</span>
+                <h3>Ruhul OS</h3>
+                <p>Portofolio ini sendiri: meja kerja interaktif yang dibangun tanpa framework.</p>
+                <span class="project-meta">
+                  <span class="tags"><span>HTML</span><span>CSS</span><span>GSAP</span></span>
+                  <span class="project-open">Buka studi kasus</span>
+                </span>
+              </a>
+
+              <!-- GANTI: ubah <div> jadi <a href="projects/nama-proyek.html"> setelah halaman proyeknya dibuat. -->
+              <div class="project-card is-pending">
+                <img class="binder-clip" src="assets/images/desk/clip-binder-black.webp" alt="" width="228"
+                  height="300" />
+                <span class="project-print project-print--empty"><span>Mockup menyusul</span></span>
+                <span class="project-kind">Ed-tech</span>
+                <h3>Proyek berikutnya</h3>
+                <p>Studi kasus sedang disiapkan.</p>
+                <span class="project-meta"><span class="project-open">Segera</span></span>
+              </div>
+
+              <!-- GANTI: sama seperti di atas. -->
+              <div class="project-card is-pending">
+                <img class="binder-clip" src="assets/images/desk/clip-binder-black.webp" alt="" width="228"
+                  height="300" />
+                <span class="project-print project-print--empty"><span>Mockup menyusul</span></span>
+                <span class="project-kind">Produk</span>
+                <h3>Proyek berikutnya</h3>
+                <p>Studi kasus sedang disiapkan.</p>
+                <span class="project-meta"><span class="project-open">Segera</span></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="mengajar" aria-labelledby="mengajar-title">
+          <img class="desk-prop prop-scissors" src="assets/images/desk/scissors.webp" alt="" width="760" height="364"
+            data-speed="1.1" />
+          <img class="desk-prop prop-highlighter" src="assets/images/desk/highlighter-yellow.webp" alt="" width="560"
+            height="489" data-speed="0.92" />
+
+          <div class="container teach">
+            <div class="teach-copy">
+              <header class="section-head">
+                <h2 id="mengajar-title">Mengajar &amp; mentoring</h2>
+                <p>
+                  Mengajar membuat saya terbiasa menjelaskan hal rumit dengan
+                  sederhana. Kemampuan itu sekarang saya bawa ke produk ed-tech dan
+                  ke tim yang saya pimpin.
+                </p>
+              </header>
+
+              <!-- GANTI: tambahkan kegiatan mengajar/mentoring lain dengan pola <li> yang sama. -->
+              <div class="index-card">
+                <img class="index-clip" src="assets/images/desk/paperclip-blue.webp" alt="" width="131" height="200" />
+                <ul>
+                  <li>
+                    <strong>Guru Simulasi Digital</strong>
+                    <span>SMK YASTRIF 2, 2023</span>
+                  </li>
+                  <li>
+                    <strong>Gambar Teknik Otomotif</strong>
+                    <span>SMK YASTRIF 2, 2023</span>
+                  </li>
+                  <li class="is-placeholder">
+                    <strong>Kegiatan mentoring</strong>
+                    <span>Tempat, tahun</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- GANTI: isi <span class="polaroid-photo"> dengan <img src="assets/images/teaching/...webp" alt="..." />.
+                 Hindari wajah siswa di bawah umur tanpa izin. -->
+            <div class="polaroids" aria-label="Foto kegiatan">
+              <figure class="polaroid">
+                <img class="tape" src="assets/images/desk/tape-kraft-flat.webp" alt="" width="560" height="170" />
+                <span class="polaroid-photo"></span>
+                <figcaption>Di kelas</figcaption>
+              </figure>
+              <figure class="polaroid">
+                <img class="tape" src="assets/images/desk/tape-yellow-strip.webp" alt="" width="560" height="235" />
+                <span class="polaroid-photo"></span>
+                <figcaption>Sesi mentoring</figcaption>
+              </figure>
+              <figure class="polaroid">
+                <img class="tape" src="assets/images/desk/tape-kraft-folded.webp" alt="" width="560" height="165" />
+                <span class="polaroid-photo"></span>
+                <figcaption>Workshop</figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="perjalanan" aria-labelledby="perjalanan-title">
+          <img class="desk-prop prop-earphones" src="assets/images/desk/earphones.webp" alt="" width="760" height="756"
+            data-speed="1.12" />
+
+          <div class="container">
+            <header class="section-head">
+              <h2 id="perjalanan-title">Perjalanan</h2>
+              <p>Jalan saya tidak lurus: kelas, ruang redaksi, lalu produk. Masing-masing mengasah cara saya bekerja.
+              </p>
+            </header>
+
+            <div class="ruler">
+              <div class="ruler-rail" aria-hidden="true"></div>
+
+              <ol class="ruler-list">
+                <li class="ruler-item">
+                  <time datetime="2026-03">2026 – sekarang</time>
+                  <div class="slip">
+                    <h3>Social Media Manager</h3>
+                    <p class="slip-org">Sekolah Prestasi Global, Depok</p>
+                    <p>Menyusun strategi konten dan sistem publikasi untuk brand sekolah.</p>
+                  </div>
+                </li>
+                <li class="ruler-item">
+                  <time datetime="2023-09">2023 – 2026</time>
+                  <div class="slip">
+                    <h3>Content Editor</h3>
+                    <p class="slip-org">MileniaNews, Jakarta Selatan</p>
+                    <p>Menyunting berita, mendesain konten sosial, dan sempat menjadi host podcast.</p>
+                  </div>
+                </li>
+                <li class="ruler-item">
+                  <time datetime="2023-07">2023</time>
+                  <div class="slip">
+                    <h3>Guru SMK</h3>
+                    <p class="slip-org">SMK YASTRIF 2</p>
+                    <p>Mengajar simulasi digital dan gambar teknik, menyusun RPP, dan mengevaluasi siswa.</p>
+                  </div>
+                </li>
+                <li class="ruler-item">
+                  <time datetime="2022-09">2022 – 2026</time>
+                  <div class="slip">
+                    <h3>S1 Teknologi Informasi</h3>
+                    <p class="slip-org">Universitas Bina Sarana Informatika</p>
+                    <p>Fokus pada pengembangan software, analisa program, dan web.</p>
+                  </div>
+                  <div class="cert">
+                    <p class="cert-title">Sertifikasi</p>
+                    <ul>
+                      <li>MTCNA, MikroTik</li>
+                      <li>PCAP, Python</li>
+                      <li>Kompetensi Analis Program</li>
+                    </ul>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <section class="section section--contact" id="kontak" aria-labelledby="kontak-title">
+          <img class="desk-prop prop-mug keep-mobile" src="assets/images/desk/coffee-mug.webp" alt="" width="437"
+            height="560" data-speed="0.92" />
+          <img class="desk-prop prop-taperoll" src="assets/images/desk/tape-yellow-roll.webp" alt="" width="520"
+            height="519" data-speed="1.1" />
+          <img class="desk-prop desk-prop--drag prop-paperball" src="assets/images/desk/paper-crumpled-real.webp" alt=""
+            width="520" height="489" />
+
+          <div class="container contact-wrap">
+            <div class="chalk-note chalk-note--contact" aria-hidden="true">
+              <span>mulai dari sini</span>
+              <svg viewBox="0 0 140 70">
+                <path class="chalk" d="M6 20 C 50 4, 100 18, 128 52" />
+                <path class="chalk" d="M112 48 L 130 56 L 128 36" />
+              </svg>
+            </div>
+
+            <div class="letter">
+              <img class="letter-clip" src="assets/images/desk/clip-bulldog-metal.webp" alt="" width="380"
+                height="308" />
+              <h2 id="kontak-title">Punya ide produk atau kelas yang ingin dibangun?</h2>
+              <p>Cara paling cepat menghubungi saya lewat LinkedIn atau email.</p>
+              <div class="letter-actions">
+                <a class="button button--primary" href="https://www.linkedin.com/in/ruhul-ikram/" target="_blank"
+                  rel="noopener noreferrer">Kirim pesan di LinkedIn</a>
+                <a class="button button--ink" href="mailto:ikramruhul@gmail.com">Email saya</a>
+                <!-- GANTI: letakkan CV di assets/cv/Ruhul-Ikram-CV.pdf -->
+                <a class="button button--ghost-ink" href="assets/cv/Ruhul-Ikram-CV.pdf" download>Unduh CV (PDF)</a>
+              </div>
+              <!-- Die-cut stickers stuck on the page -->
+              <ul class="stickers" aria-label="Media sosial">
+                <li>
+                  <a class="sticker" href="https://github.com/ruhulikram" target="_blank" rel="noopener noreferrer"
+                    aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path class="fill"
+                        d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3" />
+                    </svg>
+                  </a>
+                </li>
+                <!-- GANTI: aktifkan setelah username diisi
+                <li>
+                  <a class="sticker" href="https://instagram.com/USERNAME" target="_blank" rel="noopener noreferrer"
+                    aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <rect class="stroke" x="3" y="3" width="18" height="18" rx="5" />
+                      <circle class="stroke" cx="12" cy="12" r="4.2" />
+                      <circle class="fill" cx="17.4" cy="6.6" r="1.2" />
+                    </svg>
+                  </a>
+                </li>
+                <li>
+                  <a class="sticker" href="https://tiktok.com/@USERNAME" target="_blank" rel="noopener noreferrer"
+                    aria-label="TikTok">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path class="fill"
+                        d="M12.5 0h3.9c.1 1.5.6 3.1 1.8 4.2 1.1 1.1 2.7 1.6 4.2 1.8v4c-1.4 0-2.9-.4-4.2-1-.6-.2-1.1-.6-1.6-.9v8.7c-.1 1.4-.5 2.8-1.4 4-1.3 1.9-3.6 3.1-5.9 3.2-1.4 0-2.9-.3-4.1-1-2-1.2-3.4-3.4-3.6-5.7v-1.5c.2-1.9 1.1-3.7 2.6-5 1.7-1.4 4-2.1 6.1-1.7v4.4c-1-.3-2.1-.2-3 .4-.6.4-1.1 1-1.4 1.8-.2.5-.1 1-.1 1.6.2 1.6 1.8 3 3.5 2.9 1.1 0 2.2-.7 2.8-1.6.2-.3.4-.7.4-1.1.1-1.8.1-3.6.1-5.4V0z" />
+                    </svg>
+                  </a>
+                </li>
+                -->
               </ul>
             </div>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <section class="section" id="kontak" aria-labelledby="kontak-title">
-      <div class="container">
-        <div class="letter">
-          <h2 id="kontak-title">Punya ide produk atau kelas yang ingin dibangun?</h2>
-          <p>Cara paling cepat menghubungi saya lewat LinkedIn atau email.</p>
-          <div class="letter-actions">
-            <a class="button button--primary" href="https://www.linkedin.com/in/ruhul-ikram/" target="_blank"
-              rel="noopener noreferrer">Kirim pesan di LinkedIn</a>
-            <a class="button button--ink" href="mailto:ikramruhul@gmail.com">Email saya</a>
-            <!-- GANTI: letakkan CV di assets/cv/Ruhul-Ikram-CV.pdf -->
-            <a class="button button--ghost-ink" href="assets/cv/Ruhul-Ikram-CV.pdf" download>Unduh CV (PDF)</a>
           </div>
-          <ul class="socials" aria-label="Media sosial">
-            <li><a href="https://github.com/ruhulikram" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-            <!-- GANTI: aktifkan dan isi link sosmed lain
-            <li><a href="https://instagram.com/USERNAME" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-            -->
-          </ul>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="container footer-row">
+          <p>&copy; <span id="currentYear">2026</span> Ruhul Ikram, Tangerang, Indonesia</p>
+          <a href="#home">Kembali ke atas</a>
         </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-row">
-      <p>&copy; <span id="currentYear">2026</span> Ruhul Ikram, Bogor, Indonesia</p>
-      <a href="#home">Kembali ke atas</a>
+      </footer>
     </div>
-  </footer>
+  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Draggable.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/InertiaPlugin.min.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 

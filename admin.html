@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Panel Admin Portofolio | Ruhul Ikram</title>
+  <link rel="preload" href="assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/webp" href="assets/images/folder-ui/stamp.webp" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+
+<body>
+  <header class="studio-topbar">
+    <div class="studio-brand">
+      <img src="assets/images/folder-ui/stamp.webp" alt="Ruhul Studio" width="34" height="39" />
+      <div>
+        <h1>Panel Admin Portofolio</h1>
+        <span id="connectionStatusText">Memeriksa koneksi GitHub...</span>
+      </div>
+    </div>
+
+    <div class="studio-status" id="saveStatusBadge">
+      <span class="status-dot" id="saveStatusDot"></span>
+      <span id="saveStatusText">Siap diedit</span>
+    </div>
+
+    <div class="studio-actions">
+      <a class="btn btn--ghost" href="index.html" target="_blank" rel="noopener">Lihat Web ↗</a>
+      <button type="button" class="btn btn--ghost" id="btnPreviewHtml">👁️ Pratinjau</button>
+      <button type="button" class="btn btn--ghost" id="btnGithubConfig">🔑 Kunci Akses GitHub</button>
+      <button type="button" class="btn btn--yellow" id="btnPublishGithub">🚀 Simpan &amp; Publish</button>
+    </div>
+  </header>
+
+  <div class="studio-layout">
+    <aside class="studio-sidebar" aria-label="Menu Studio">
+      <span class="sidebar-label">Menu Konten</span>
+      <button type="button" class="tab-btn is-active" data-tab="overview">
+        <span>⚡ Ringkasan &amp; Seksi</span>
+      </button>
+      <button type="button" class="tab-btn" data-tab="hero">
+        <span>🏠 Hero &amp; CV</span>
+      </button>
+      <button type="button" class="tab-btn" data-tab="projects">
+        <span>🗂️ Proyek &amp; Ongoing</span>
+        <span class="tab-badge" id="badgeProjectCount">0</span>
+      </button>
+      <button type="button" class="tab-btn" data-tab="teaching">
+        <span>🎓 Mengajar &amp; Polaroid</span>
+        <span class="tab-badge" id="badgeTeachCount">0</span>
+      </button>
+      <button type="button" class="tab-btn" data-tab="journey">
+        <span>📏 Perjalanan &amp; Sertifikat</span>
+        <span class="tab-badge" id="badgeJourneyCount">0</span>
+      </button>
+      <button type="button" class="tab-btn" data-tab="process">
+        <span>📌 Proses Kerja (4 Note)</span>
+      </button>
+      <button type="button" class="tab-btn" data-tab="contact">
+        <span>✉️ Kontak &amp; Sosmed</span>
+        <span class="tab-badge" id="badgeSocialCount">0</span>
+      </button>
+
+      <div class="studio-sidebar-footer">
+        <button type="button" class="btn btn--ghost btn--sm" id="btnResetDefault">↺ Batal / Muat Ulang Data Live</button>
+      </div>
+    </aside>
+
+    <main class="studio-main">
+      <!-- TAB 1: OVERVIEW & SECTIONS -->
+      <section class="tab-pane is-active" id="pane-overview">
+        <div class="pane-header">
+          <div>
+            <h2>Ringkasan &amp; Visibilitas Seksi</h2>
+            <p>Atur seksi mana saja yang tampil di halaman utama, serta informasi judul &amp; deskripsi web Anda.</p>
+          </div>
+        </div>
+
+        <div class="stats-grid" id="statsGrid"></div>
+
+        <div class="paper-box">
+          <div class="paper-box-head">
+            <h3 class="paper-box-title">Aktif / Nonaktifkan Seksi Halaman Utama</h3>
+          </div>
+          <p style="margin-bottom: 14px; color: var(--ink-soft); font-size: 0.88rem;">
+            Geser tombol di bawah untuk menampilkan atau menyembunyikan seksi tertentu dari halaman portofolio Anda.
+          </p>
+          <div class="section-toggle-list" id="sectionToggleList"></div>
+        </div>
+
+        <div class="paper-box">
+          <div class="paper-box-head">
+            <h3 class="paper-box-title">Judul Website &amp; Informasi SEO</h3>
+          </div>
+          <div class="form-grid" id="metaFormContainer"></div>
+        </div>
+      </section>
+
+      <!-- TAB 2: HERO & CV -->
+      <section class="tab-pane" id="pane-hero">
+        <div class="pane-header">
+          <div>
+            <h2>Hero, Identitas &amp; File CV</h2>
+            <p>Ubah headline utama, sub-teks perkenalan, foto perangko (stamp), dan unggah file CV PDF Anda.</p>
+          </div>
+        </div>
+        <div id="heroEditorContainer"></div>
+      </section>
+
+      <!-- TAB 3: PROJECTS & ONGOING -->
+      <section class="tab-pane" id="pane-projects">
+        <div class="pane-header">
+          <div>
+            <h2>Proyek &amp; Ongoing Project</h2>
+            <p>Tambah proyek selesai, proyek yang sedang dikerjakan (Ongoing + pita progres), maupun rencana proyek berikutnya.</p>
+          </div>
+          <button type="button" class="btn btn--yellow" id="btnAddProject">+ Tambah Proyek Baru</button>
+        </div>
+
+        <div class="paper-box">
+          <div class="paper-box-head">
+            <h3 class="paper-box-title">Judul &amp; Pengantar Seksi Proyek</h3>
+          </div>
+          <div class="form-grid" id="projectsHeaderForm"></div>
+        </div>
+
+        <div class="filter-bar" id="projectFilterBar">
+          <button type="button" class="filter-chip is-active" data-filter="all">Semua</button>
+          <button type="button" class="filter-chip" data-filter="ongoing">Sedang Dikerjakan (Ongoing)</button>
+          <button type="button" class="filter-chip" data-filter="completed">Selesai</button>
+          <button type="button" class="filter-chip" data-filter="upcoming">Segera (Upcoming)</button>
+          <button type="button" class="filter-chip" data-filter="inactive">Nonaktif / Disembunyikan</button>
+        </div>
+
+        <div id="projectsListContainer"></div>
+      </section>
+
+      <!-- TAB 4: TEACHING & POLAROIDS -->
+      <section class="tab-pane" id="pane-teaching">
+        <div class="pane-header">
+          <div>
+            <h2>Mengajar, Mentoring &amp; Foto Polaroid</h2>
+            <p>Kelola daftar kegiatan mengajar pada kartu indeks serta unggah foto kegiatan ke bingkai Polaroid.</p>
+          </div>
+        </div>
+        <div id="teachingEditorContainer"></div>
+      </section>
+
+      <!-- TAB 5: JOURNEY & CERTIFICATIONS -->
+      <section class="tab-pane" id="pane-journey">
+        <div class="pane-header">
+          <div>
+            <h2>Perjalanan Karir &amp; Kartu Sertifikasi</h2>
+            <p>Kelola slip riwayat pekerjaan/studi di sepanjang penggaris besi dan daftar sertifikasi Anda.</p>
+          </div>
+          <button type="button" class="btn btn--yellow" id="btnAddJourney">+ Tambah Slip Perjalanan</button>
+        </div>
+        <div id="journeyEditorContainer"></div>
+      </section>
+
+      <!-- TAB 6: PROCESS -->
+      <section class="tab-pane" id="pane-process">
+        <div class="pane-header">
+          <div>
+            <h2>Proses Kerja (Sticky Notes)</h2>
+            <p>Atur judul seksi dan isi keempat kertas catatan tempel di papan proses kerja.</p>
+          </div>
+          <button type="button" class="btn btn--yellow" id="btnAddProcessStep">+ Tambah Sticky Note</button>
+        </div>
+        <div id="processEditorContainer"></div>
+      </section>
+
+      <!-- TAB 7: CONTACT & SOCIALS -->
+      <section class="tab-pane" id="pane-contact">
+        <div class="pane-header">
+          <div>
+            <h2>Kontak &amp; Stiker Sosial Media</h2>
+            <p>Atur kalimat ajakan pada buku sketsa, email, LinkedIn, serta aktifkan/nonaktifkan stiker sosial media Anda.</p>
+          </div>
+          <button type="button" class="btn btn--yellow" id="btnAddSocial">+ Tambah Stiker Sosmed</button>
+        </div>
+        <div id="contactEditorContainer"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- MODAL: CASE STUDY EDITOR -->
+  <div class="modal-backdrop" id="caseStudyModal" aria-hidden="true">
+    <div class="modal-dialog" role="dialog" aria-labelledby="caseModalTitle">
+      <div class="modal-header">
+        <h3 id="caseModalTitle">Editor Halaman Studi Kasus</h3>
+        <button type="button" class="btn btn--ghost-ink btn--sm" id="btnCloseCaseModal">✕ Tutup</button>
+      </div>
+      <div class="modal-body" id="caseModalBody"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn--ink" id="btnCancelCaseModal">Selesai</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: GITHUB SETTINGS -->
+  <div class="modal-backdrop" id="githubModal" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 520px;" role="dialog" aria-labelledby="githubModalTitle">
+      <div class="modal-header">
+        <h3 id="githubModalTitle">🔑 Kunci Akses GitHub (Cukup Isi Sekali)</h3>
+        <button type="button" class="btn btn--ghost-ink btn--sm" id="btnCloseGithubModal">✕ Tutup</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.88rem; color: var(--ink-soft); margin-bottom: 16px;">
+          Agar tombol <strong>Simpan &amp; Publish</strong> bisa langsung meng-update website GitHub Pages Anda, masukkan Token GitHub Anda di bawah ini. Token tersimpan aman di browser Anda sendiri.
+        </p>
+        <div class="form-grid">
+          <div class="field field--full">
+            <label for="ghToken">GitHub Personal Access Token</label>
+            <input type="password" class="input" id="ghToken" placeholder="ghp_... atau github_pat_..." />
+            <small>Cara buat: Buka GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → centang <strong>repo</strong>.</small>
+          </div>
+          <div class="field">
+            <label for="ghOwner">Username GitHub</label>
+            <input type="text" class="input" id="ghOwner" value="ruhulikram" />
+          </div>
+          <div class="field">
+            <label for="ghRepo">Nama Repository</label>
+            <input type="text" class="input" id="ghRepo" value="ruhulikram.github.io" />
+          </div>
+          <div class="field field--full">
+            <label for="ghBranch">Branch Live (Kosongkan untuk otomatis)</label>
+            <input type="text" class="input" id="ghBranch" placeholder="Otomatis deteksi (master / main)" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn--danger btn--sm" id="btnClearGithubToken" style="margin-right:auto;">Hapus Token</button>
+        <button type="button" class="btn btn--ghost-ink" id="btnTestGithub">Tes Koneksi</button>
+        <button type="button" class="btn btn--ink" id="btnSaveGithubConfig">Simpan Kunci Akses</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: LIVE PREVIEW -->
+  <div class="modal-backdrop" id="previewModal" aria-hidden="true">
+    <div class="modal-dialog" style="width: min(100%, 1280px); margin-bottom: 0;">
+      <div class="modal-header">
+        <h3>👁️ Pratinjau Tampilan Portofolio</h3>
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="btn btn--ghost-ink btn--sm" id="btnPreviewDesktop">Layar Desktop</button>
+          <button type="button" class="btn btn--ghost-ink btn--sm" id="btnPreviewMobile">Layar HP (390px)</button>
+          <button type="button" class="btn btn--ink btn--sm" id="btnClosePreviewModal">✕ Tutup</button>
+        </div>
+      </div>
+      <div class="modal-body" style="padding: 0; height: 80vh; background: #103528; display:flex; justify-content:center;">
+        <iframe id="previewIframe" title="Pratinjau Portofolio" style="width:100%; height:100%; border:none; background:#1d5a43; transition: width 240ms ease;"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <script src="js/admin.js" defer></script>
+</body>
+
+</html>

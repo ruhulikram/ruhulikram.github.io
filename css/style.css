@@ -15,7 +15,6 @@
   --chalk: #eef4e6;
   --chalk-soft: rgba(238, 244, 230, 0.74);
   --paper: #fdfcf8;
-  --kraft: #e7c98f;
   --ink: #18201c;
   --ink-soft: rgba(24, 32, 28, 0.7);
   --yellow: #ffd83d;
@@ -23,9 +22,13 @@
   --green: #9fe3bd;
   --lavender: #c9c0ff;
   --font: "Geist", "Helvetica Neue", Arial, sans-serif;
+  --hand: "Nanum Pen Script", "Segoe Print", cursive;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Shadows by height above the mat: paper lies flat, props stand taller. */
   --shadow-paper: 0 1px 1px rgba(0, 0, 0, 0.12), 0 12px 28px rgba(5, 25, 17, 0.35);
+  --drop-low: drop-shadow(0 3px 3px rgba(5, 25, 17, 0.35)) drop-shadow(0 8px 14px rgba(5, 25, 17, 0.2));
+  --drop-high: drop-shadow(6px 14px 10px rgba(5, 25, 17, 0.4)) drop-shadow(14px 30px 30px rgba(5, 25, 17, 0.25));
   --cm: 38px;
 }
 
@@ -42,23 +45,14 @@ html {
   scroll-padding-top: 96px;
 }
 
+html.has-motion {
+  scroll-behavior: auto;
+}
+
 body {
   min-width: 320px;
   color: var(--chalk);
-  background-color: var(--mat);
-  background-image:
-    linear-gradient(var(--mat-line-strong) 1px, transparent 1px),
-    linear-gradient(90deg, var(--mat-line-strong) 1px, transparent 1px),
-    linear-gradient(var(--mat-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--mat-line) 1px, transparent 1px),
-    radial-gradient(ellipse at 50% 0%, #22694f, var(--mat-deep) 90%);
-  background-size:
-    calc(var(--cm) * 5) calc(var(--cm) * 5),
-    calc(var(--cm) * 5) calc(var(--cm) * 5),
-    var(--cm) var(--cm),
-    var(--cm) var(--cm),
-    100% 100%;
-  background-attachment: scroll, scroll, scroll, scroll, fixed;
+  background: radial-gradient(ellipse at 50% 0%, #22694f, var(--mat-deep) 90%) fixed var(--mat);
   font-family: var(--font);
   font-size: 1.0625rem;
   line-height: 1.55;
@@ -66,12 +60,27 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Ruler ticks along the left edge of the mat */
+/* The mat grid lives on the scrolling content so it moves with the objects. */
+.mat {
+  overflow-x: clip;
+  background-image:
+    linear-gradient(var(--mat-line-strong) 1px, transparent 1px),
+    linear-gradient(90deg, var(--mat-line-strong) 1px, transparent 1px),
+    linear-gradient(var(--mat-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--mat-line) 1px, transparent 1px);
+  background-size:
+    calc(var(--cm) * 5) calc(var(--cm) * 5),
+    calc(var(--cm) * 5) calc(var(--cm) * 5),
+    var(--cm) var(--cm),
+    var(--cm) var(--cm);
+}
+
+/* Ruler ticks along the left edge of the screen */
 body::before {
   content: "";
   position: fixed;
   inset: 0 auto 0 0;
-  z-index: 1;
+  z-index: 50;
   width: 18px;
   pointer-events: none;
   background-image:
@@ -136,6 +145,8 @@ ol {
 }
 
 .container {
+  position: relative;
+  z-index: 2;
   width: min(100% - 48px, 1180px);
   margin-inline: auto;
 }
@@ -152,17 +163,7 @@ ol {
   font-weight: 720;
   letter-spacing: -0.01em;
   text-decoration: none;
-  transition:
-    transform 260ms var(--ease-spring),
-    background-color 200ms ease;
-}
-
-.button:hover {
-  transform: translateY(-2px);
-}
-
-.button:active {
-  transform: translateY(0) scale(0.98);
+  transition: background-color 200ms ease;
 }
 
 .button--primary {
@@ -205,111 +206,244 @@ ol {
   font-weight: 650;
 }
 
-/* Sticky-note navigation, stuck along the top edge of the mat */
+/* Navigation: masking-tape labels written on with a marker */
 .site-header {
   position: fixed;
-  top: 10px;
-  left: clamp(20px, 3vw, 40px);
+  top: 12px;
+  left: clamp(24px, 3vw, 40px);
   z-index: 100;
   transition: transform 520ms cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 .site-header.is-hidden {
-  transform: translateY(-140%);
+  transform: translateY(-160%);
 }
 
-.snote-stack {
+.tape-nav {
   display: flex;
   align-items: center;
+  gap: 4px;
 }
 
-.snote-link {
-  --note-rotate: 0deg;
-  position: relative;
-  display: block;
-  height: 52px;
+.tape-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 6px 26px 4px;
   color: var(--ink);
-  text-decoration: none;
-  transform: rotate(var(--note-rotate));
-  transition: transform 380ms var(--ease-spring);
-}
-
-.snote-link+.snote-link {
-  margin-left: -10px;
-}
-
-.snote-link img {
-  width: auto;
-  height: 100%;
-  max-width: none;
-  pointer-events: none;
-  user-select: none;
-  filter: drop-shadow(0 6px 8px rgba(5, 25, 17, 0.4));
-}
-
-.snote-link:hover,
-.snote-link:focus-visible {
-  z-index: 5;
-  transform: translateY(4px) rotate(0deg);
-}
-
-.snote-link:focus-visible {
-  outline: 0;
-}
-
-.snote-link:focus-visible .snote-label {
-  outline: 3px solid var(--ink);
-  outline-offset: 3px;
-}
-
-.snote-label {
-  position: absolute;
-  top: 50%;
-  right: 10%;
-  left: 10%;
-  font-size: 0.86rem;
-  font-weight: 800;
+  background: url("../assets/images/desk/tape-kraft-flat.webp") center / 100% 100% no-repeat;
+  filter: var(--drop-low);
+  font-family: var(--hand);
+  font-size: 1.6rem;
   line-height: 1;
-  letter-spacing: -0.02em;
-  text-align: center;
+  text-decoration: none;
   white-space: nowrap;
-  transform: translateY(-50%);
+  transition: transform 320ms var(--ease-spring);
 }
 
-.snote-link[aria-current="true"] .snote-label {
+.tape-link:nth-child(odd) {
+  transform: rotate(-2deg);
+}
+
+.tape-link:nth-child(even) {
+  transform: rotate(1.5deg);
+}
+
+.tape-link:hover {
+  transform: translateY(3px) rotate(0deg);
+}
+
+.tape-link img {
+  width: 26px;
+}
+
+.tape-link--yellow {
+  background-image: url("../assets/images/desk/tape-yellow-strip.webp");
+}
+
+.tape-link[aria-current="true"] {
   text-decoration: underline;
   text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
+  text-underline-offset: 3px;
 }
 
-.snote-link--identity {
-  --note-rotate: -1.5deg;
-  z-index: 4;
+.tape-link:focus-visible {
+  outline-color: var(--ink);
 }
 
-.snote-link--identity .snote-label {
-  left: 32%;
-  right: 6%;
-}
-
-.snote-link--journey {
-  --note-rotate: 1.2deg;
-  z-index: 3;
-}
-
-.snote-link--journey .snote-label {
-  right: 26%;
-  left: 6%;
-}
-
-.snote-link--work {
-  --note-rotate: -0.8deg;
-  z-index: 2;
-}
-
-.snote-link--contact {
-  --note-rotate: 1.4deg;
+/* Desk props: real objects scattered around the mat */
+.desk-prop {
+  position: absolute;
   z-index: 1;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  filter: var(--drop-low);
+}
+
+html.has-drag .desk-prop--drag {
+  z-index: 40;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+}
+
+html.has-drag .desk-prop--drag:active {
+  cursor: grabbing;
+}
+
+.prop-keyboard {
+  top: -60px;
+  right: -110px;
+  width: min(560px, 40vw);
+  filter: var(--drop-high);
+  rotate: -8deg;
+}
+
+/* Props keep 40px clear of the left edge so the ruler ticks stay visible. */
+.prop-pencil {
+  bottom: 7%;
+  left: max(40px, 3%);
+  width: min(380px, 30vw);
+  rotate: -14deg;
+}
+
+.prop-shaving {
+  bottom: 2%;
+  left: 31%;
+  width: 110px;
+}
+
+.prop-eraser {
+  right: 5%;
+  bottom: 7%;
+  width: 170px;
+  rotate: 14deg;
+}
+
+.prop-triangle {
+  top: 40px;
+  right: -60px;
+  width: 300px;
+  rotate: 12deg;
+}
+
+.prop-clips {
+  bottom: -30px;
+  left: 40px;
+  width: 210px;
+}
+
+.prop-macbook {
+  top: 20px;
+  right: -150px;
+  width: 540px;
+  filter: var(--drop-high);
+  rotate: -8deg;
+}
+
+.prop-ruler {
+  bottom: 24px;
+  left: 4%;
+  width: 620px;
+  rotate: -3deg;
+}
+
+.prop-scissors {
+  bottom: 10px;
+  left: 40px;
+  width: 280px;
+  rotate: 24deg;
+}
+
+.prop-highlighter {
+  top: 40px;
+  right: 2%;
+  width: 150px;
+  rotate: -24deg;
+}
+
+.prop-earphones {
+  top: 60px;
+  right: -50px;
+  width: 340px;
+}
+
+.prop-mug {
+  top: 70px;
+  right: 6%;
+  width: 190px;
+  filter: var(--drop-high);
+}
+
+.prop-taperoll {
+  bottom: 70px;
+  left: max(40px, 4%);
+  width: 160px;
+}
+
+.prop-paperball {
+  right: 12%;
+  bottom: 50px;
+  width: 120px;
+}
+
+/* Chalk annotations */
+.chalk-note {
+  position: absolute;
+  z-index: 15;
+  color: var(--chalk);
+  font-family: var(--hand);
+  font-size: 1.7rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.chalk-note svg {
+  display: block;
+  overflow: visible;
+}
+
+.chalk {
+  fill: none;
+  stroke: var(--chalk);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.85;
+}
+
+/* Sits above the folder; the arrow stops at the folder lip, not on a file. */
+.chalk-note--hero {
+  top: -6%;
+  left: 2%;
+  rotate: -6deg;
+  transition: opacity 200ms ease;
+}
+
+.chalk-note--hero svg {
+  width: 80px;
+  margin: 2px 0 0 120px;
+}
+
+/* Get out of the way of the file labels */
+.folder-stage:has(.file-interactive:hover, .file-interactive:focus-visible) .chalk-note {
+  opacity: 0;
+}
+
+.chalk-note--contact {
+  top: 38%;
+  left: 0;
+  width: 170px;
+  rotate: -4deg;
+}
+
+.chalk-note--contact svg {
+  width: 140px;
+  margin-top: 6px;
 }
 
 /* Hero */
@@ -318,25 +452,11 @@ ol {
   min-height: max(100svh, 680px);
   padding: 120px max(24px, calc((100% - 1180px) / 2)) 64px;
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: center;
   gap: clamp(24px, 4vw, 64px);
   overflow: hidden;
   isolation: isolate;
-}
-
-/* The 45-degree guide every cutting mat has */
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(135deg,
-      transparent calc(50% - 1px),
-      var(--mat-line-strong) calc(50% - 1px),
-      var(--mat-line-strong) calc(50% + 1px),
-      transparent calc(50% + 1px));
-  pointer-events: none;
 }
 
 .hero-copy {
@@ -345,21 +465,26 @@ ol {
 }
 
 .hero h1 {
-  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
   font-weight: 650;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
-  color: var(--yellow);
 }
 
 .hero-name {
   display: block;
   margin-bottom: 14px;
   color: var(--chalk);
-  font-size: clamp(3.2rem, 7.4vw, 6.6rem);
+  font-size: clamp(2.8rem, 6vw, 5.6rem);
   font-weight: 860;
   line-height: 0.88;
   letter-spacing: -0.06em;
+  white-space: nowrap;
+}
+
+.hero-role {
+  display: block;
+  color: var(--yellow);
+  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
 }
 
 .hero-lead {
@@ -382,7 +507,7 @@ ol {
   z-index: 10;
   display: grid;
   place-items: center;
-  padding: 8% 14% 0;
+  padding: 10% 14% 0;
   perspective: 1200px;
 }
 
@@ -547,13 +672,12 @@ ol {
   position: absolute;
   z-index: 9;
   right: 9%;
-  bottom: 24%;
+  bottom: 22%;
   color: var(--ink-soft);
-  font-size: clamp(0.8rem, 1.3vw, 1.05rem);
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -0.02em;
-  transform: rotate(-2deg);
+  font-family: var(--hand);
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  line-height: 1;
+  rotate: -3deg;
 }
 
 /* Paper butterflies */
@@ -568,7 +692,7 @@ ol {
 
 .paper-butterfly--primary {
   top: 16%;
-  left: 90%;
+  left: 88%;
   width: clamp(4.5rem, 7vw, 7rem);
 }
 
@@ -579,8 +703,8 @@ ol {
 }
 
 .paper-butterfly--dart {
-  top: 82%;
-  left: 92%;
+  top: 80%;
+  left: 72%;
   width: clamp(4rem, 6vw, 6rem);
 }
 
@@ -643,12 +767,12 @@ ol {
 /* Sections */
 .section {
   position: relative;
-  padding-block: clamp(72px, 10vw, 128px);
+  padding-block: clamp(56px, 7vw, 96px);
 }
 
 .section-head {
   max-width: 40rem;
-  margin-bottom: clamp(32px, 5vw, 56px);
+  margin-bottom: clamp(28px, 4vw, 40px);
 }
 
 .section-head h2 {
@@ -665,7 +789,21 @@ ol {
   text-wrap: pretty;
 }
 
-/* Process: four sticky notes, in order */
+/* Process: four sticky notes, in order, pinned to the mat */
+.process-board {
+  position: relative;
+  padding-top: 72px;
+}
+
+.process-arrows {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 72px;
+  overflow: visible;
+}
+
 .process {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -676,19 +814,35 @@ ol {
 .process-note {
   position: relative;
   min-height: 230px;
-  padding: 26px 22px 24px;
+  padding: 30px 22px 24px;
   color: var(--ink);
-  background: var(--note, var(--yellow));
-  box-shadow: var(--shadow-paper);
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.28), transparent 45%),
+    var(--note, var(--yellow));
+  box-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.12),
+    0 14px 22px -10px rgba(5, 25, 17, 0.6);
   counter-increment: step;
 }
 
+/* The lifted bottom corner of a sticky note */
+.process-note::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 46px;
+  height: 46px;
+  background: linear-gradient(315deg, rgba(5, 25, 17, 0.18), transparent 60%);
+}
+
 .process-note:nth-child(odd) {
-  transform: rotate(-1.2deg);
+  rotate: -1.2deg;
 }
 
 .process-note:nth-child(even) {
-  transform: rotate(1deg) translateY(10px);
+  rotate: 1deg;
+  translate: 0 10px;
 }
 
 .process-note::before {
@@ -700,6 +854,15 @@ ol {
   line-height: 1;
   letter-spacing: -0.06em;
   opacity: 0.35;
+}
+
+.pin {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  width: 30px;
+  margin-left: -15px;
+  filter: drop-shadow(3px 7px 4px rgba(5, 25, 17, 0.4));
 }
 
 .process-note h3 {
@@ -732,114 +895,152 @@ ol {
   --note: var(--lavender);
 }
 
-/* Projects: kraft folders with a paper sheet clipped in */
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(28px, 4vw, 44px) clamp(20px, 3vw, 32px);
+/* Projects: printed sheets held by a binder clip */
+.project-viewport {
+  position: relative;
+  z-index: 2;
+  width: min(100% - 48px, 1180px);
+  margin-inline: auto;
 }
 
-.project-folder {
+.project-track {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(28px, 3vw, 40px);
+  padding-top: 40px;
+}
+
+.project-card {
   position: relative;
-  margin-top: 30px;
   display: flex;
   flex-direction: column;
+  padding: 16px 16px 22px;
   color: var(--ink);
-  background: var(--kraft);
-  border-radius: 4px 14px 14px 14px;
+  background: var(--paper);
   box-shadow: var(--shadow-paper);
   text-decoration: none;
-  transition: transform 360ms var(--ease-out);
+  transition: translate 300ms var(--ease-out);
 }
 
-a.project-folder:hover {
-  transform: translateY(-6px) rotate(-0.4deg);
+.project-card:nth-child(odd) {
+  rotate: -1deg;
 }
 
-.project-folder--featured {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-  align-items: center;
+.project-card:nth-child(even) {
+  rotate: 1.2deg;
 }
 
-.project-tab {
+a.project-card:hover {
+  translate: 0 -6px;
+}
+
+.binder-clip {
   position: absolute;
-  bottom: 100%;
-  left: 0;
-  padding: 7px 18px 5px;
-  background: var(--kraft);
-  border-radius: 10px 10px 0 0;
-  font-size: 0.8rem;
-  font-weight: 750;
+  top: -46px;
+  left: 50%;
+  z-index: 3;
+  width: 50px;
+  margin-left: -25px;
+  filter: var(--drop-low);
 }
 
-.project-sheet {
+.project-print {
+  position: relative;
   display: block;
-  margin: 18px 18px 0;
-  padding: 10px;
-  background: var(--paper);
-  box-shadow: 0 2px 6px rgba(60, 40, 10, 0.2);
-  transform: rotate(-1deg);
-  transition: transform 360ms var(--ease-out);
+  border: 1px solid rgba(24, 32, 28, 0.12);
 }
 
-.project-folder--featured .project-sheet {
-  margin: 22px 0 22px 22px;
+.project-badge {
+  position: absolute;
+  top: 10px;
+  right: -10px;
+  z-index: 4;
+  padding: 4px 18px 2px;
+  color: var(--ink);
+  background: url("../assets/images/desk/tape-yellow-strip.webp") center / 100% 100% no-repeat;
+  filter: var(--drop-low);
+  font-family: var(--hand);
+  font-size: 1.35rem;
+  line-height: 1.05;
+  white-space: nowrap;
+  rotate: 4deg;
+  pointer-events: none;
 }
 
-a.project-folder:hover .project-sheet {
-  transform: rotate(0.6deg) translateY(-4px);
+.project-progress {
+  margin: 12px 4px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.project-sheet img {
+.project-progress-head {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--hand);
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.project-progress-bar {
+  height: 8px;
+  background: rgba(24, 32, 28, 0.08);
+  border: 1px solid rgba(24, 32, 28, 0.2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.project-progress-fill {
+  display: block;
+  height: 100%;
+  background: var(--yellow);
+  border-radius: 999px;
+}
+
+.project-print img {
   width: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
   object-position: top;
 }
 
-.project-sheet--empty {
+.project-print--empty {
   aspect-ratio: 16 / 10;
   display: grid;
   place-items: center;
   color: rgba(24, 32, 28, 0.45);
-  background:
-    repeating-linear-gradient(-45deg,
+  background: repeating-linear-gradient(-45deg,
       transparent 0 10px,
-      rgba(24, 32, 28, 0.05) 10px 20px),
-    var(--paper);
+      rgba(24, 32, 28, 0.05) 10px 20px);
   font-size: 0.9rem;
   font-weight: 650;
 }
 
-.project-body {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 22px 24px 24px;
-}
-
-.project-folder--featured .project-body {
-  padding: 32px clamp(24px, 3vw, 44px);
-}
-
-.project-body h3 {
-  font-size: clamp(1.5rem, 2.4vw, 2.2rem);
-  font-weight: 850;
-  line-height: 1;
-  letter-spacing: -0.045em;
-}
-
-.project-body>p {
-  margin-top: 10px;
+.project-kind {
+  margin: 18px 4px 0;
   color: var(--ink-soft);
-  font-size: 0.98rem;
+  font-size: 0.82rem;
+  font-weight: 650;
+}
+
+.project-card h3 {
+  margin: 4px 4px 0;
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  font-weight: 850;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.project-card>p {
+  margin: 8px 4px 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
 }
 
 .project-meta {
-  margin-top: auto;
-  padding-top: 20px;
+  margin: auto 4px 0;
+  padding-top: 18px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -855,13 +1056,28 @@ a.project-folder:hover .project-sheet {
   text-underline-offset: 4px;
 }
 
-.project-folder.is-pending {
-  opacity: 0.78;
+.project-card.is-pending .project-open,
+div.project-card.is-ongoing .project-open {
+  color: var(--ink-soft);
+  text-decoration: none;
 }
 
-.project-folder.is-pending .project-open {
-  text-decoration: none;
-  color: var(--ink-soft);
+/* Horizontal desk scroll, only when the motion layer is running on a wide screen */
+@media (min-width: 981px) {
+  .has-motion .project-viewport {
+    width: 100%;
+  }
+
+  .has-motion .project-track {
+    display: flex;
+    gap: 48px;
+    width: max-content;
+    padding: 56px max(24px, calc((100vw - 1180px) / 2)) 24px;
+  }
+
+  .has-motion .project-card {
+    width: min(440px, 34vw);
+  }
 }
 
 /* Teaching */
@@ -872,15 +1088,24 @@ a.project-folder:hover .project-sheet {
   gap: clamp(32px, 6vw, 80px);
 }
 
-/* Index card: ruled lines and a red header line */
+/* Index card: red header line, blue rules, a paperclip */
 .index-card {
+  position: relative;
   max-width: 30rem;
   padding: 30px 26px 10px;
   color: var(--ink);
   background: var(--paper);
   border-top: 22px solid var(--paper);
   box-shadow: var(--shadow-paper), inset 0 2px 0 #e86a5a;
-  transform: rotate(-0.8deg);
+  rotate: -0.8deg;
+}
+
+.index-clip {
+  position: absolute;
+  top: -44px;
+  left: 28px;
+  width: 30px;
+  filter: var(--drop-low);
 }
 
 .index-card li {
@@ -921,37 +1146,36 @@ a.project-folder:hover .project-sheet {
 .polaroid:nth-child(1) {
   top: 0;
   left: 4%;
-  transform: rotate(-6deg);
+  rotate: -6deg;
 }
 
 .polaroid:nth-child(2) {
   top: 8%;
   right: 2%;
   z-index: 2;
-  transform: rotate(5deg);
+  rotate: 5deg;
 }
 
 .polaroid:nth-child(3) {
   bottom: 0;
   left: 6%;
   z-index: 3;
-  transform: rotate(-2deg);
+  rotate: -2deg;
 }
 
-/* Masking tape on each photo */
-.polaroid::before {
-  content: "";
+.tape {
   position: absolute;
-  top: -12px;
+  top: -20px;
   left: 50%;
-  width: 84px;
-  height: 24px;
-  background: rgba(255, 244, 196, 0.75);
-  transform: translateX(-50%) rotate(-3deg);
+  z-index: 2;
+  width: 110px;
+  margin-left: -55px;
+  rotate: -4deg;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15));
 }
 
 .polaroid-photo,
-.polaroid img {
+.polaroid>img:not(.tape) {
   display: block;
   width: 100%;
   aspect-ratio: 1;
@@ -964,33 +1188,32 @@ a.project-folder:hover .project-sheet {
 }
 
 .polaroid figcaption {
-  padding: 10px 2px 14px;
+  padding: 8px 2px 10px;
   color: var(--ink);
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-family: var(--hand);
+  font-size: 1.6rem;
+  line-height: 1.1;
 }
 
-/* Journey: a ruler with paper slips laid along it */
+/* Journey: a steel ruler with paper slips laid along it */
 .ruler {
   position: relative;
-  padding-left: 0;
 }
 
-.ruler::before {
-  content: "";
+.ruler-rail {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 150px;
-  width: 26px;
+  width: 30px;
   background:
-    linear-gradient(rgba(24, 32, 28, 0.55) 2px, transparent 2px) 0 0 / 14px 38px repeat-y,
-    linear-gradient(rgba(24, 32, 28, 0.35) 1px, transparent 1px) 0 0 / 8px 9.5px repeat-y,
-    #f4efd7;
+    linear-gradient(rgba(30, 34, 36, 0.6) 2px, transparent 2px) 0 0 / 14px 38px repeat-y,
+    linear-gradient(rgba(30, 34, 36, 0.38) 1px, transparent 1px) 0 0 / 8px 9.5px repeat-y,
+    linear-gradient(90deg, #b9bec2, #f1f3f4 45%, #c5cacd 70%, #a9aeb2);
   border-radius: 3px;
   box-shadow: var(--shadow-paper);
 }
+
 
 .ruler-item {
   position: relative;
@@ -1005,11 +1228,11 @@ a.project-folder:hover .project-sheet {
 
 .ruler-item time {
   padding: 18px 24px 0 0;
-  white-space: nowrap;
   color: var(--yellow);
   font-size: 0.95rem;
   font-weight: 750;
   text-align: right;
+  white-space: nowrap;
 }
 
 .slip {
@@ -1022,11 +1245,11 @@ a.project-folder:hover .project-sheet {
 }
 
 .ruler-item:nth-child(even) .slip {
-  transform: rotate(0.5deg);
+  rotate: 0.5deg;
 }
 
 .ruler-item:nth-child(odd) .slip {
-  transform: rotate(-0.4deg);
+  rotate: -0.4deg;
 }
 
 .slip h3 {
@@ -1048,11 +1271,39 @@ a.project-folder:hover .project-sheet {
   font-size: 0.98rem;
 }
 
-.slip .tags {
-  margin-top: 14px;
+/* Certificate card resting beside the last slip */
+.cert {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  width: 300px;
+  aspect-ratio: 824 / 635;
+  padding: 34px 38px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--ink);
+  background: url("../assets/images/desk/certificate-card.webp") center / 100% 100% no-repeat;
+  filter: var(--drop-low);
+  rotate: 4deg;
 }
 
-/* Contact: a letter on the mat */
+.cert-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.cert li {
+  font-family: var(--hand);
+  font-size: 1.45rem;
+  line-height: 1.15;
+}
+
+/* Contact: a sketchbook page clipped to the mat */
+.contact-wrap {
+  position: relative;
+}
+
 .letter {
   position: relative;
   max-width: 820px;
@@ -1061,23 +1312,22 @@ a.project-folder:hover .project-sheet {
   color: var(--ink);
   background: var(--paper);
   box-shadow: var(--shadow-paper);
-  transform: rotate(-0.6deg);
+  rotate: -0.6deg;
 }
 
-.letter::before {
-  content: "";
+.letter-clip {
   position: absolute;
-  top: -14px;
+  top: -44px;
   left: 50%;
-  width: 120px;
-  height: 28px;
-  background: rgba(255, 216, 61, 0.8);
-  transform: translateX(-50%) rotate(2deg);
+  z-index: 2;
+  width: 92px;
+  margin-left: -46px;
+  filter: var(--drop-high);
 }
 
 .letter h2 {
   max-width: 16ch;
-  font-size: clamp(2rem, 4.6vw, 3.6rem);
+  font-size: clamp(2rem, 4.2vw, 3.2rem);
   font-weight: 850;
   line-height: 0.98;
   letter-spacing: -0.05em;
@@ -1096,19 +1346,77 @@ a.project-folder:hover .project-sheet {
   gap: 10px;
 }
 
-.socials {
+/* Social links as round die-cut stickers */
+.stickers {
   margin-top: 24px;
   display: flex;
   flex-wrap: wrap;
-  gap: 18px;
+  gap: 14px;
 }
 
-.socials a {
-  font-weight: 700;
-  text-underline-offset: 4px;
+.sticker {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  aspect-ratio: 1;
+  color: var(--ink);
+  background: var(--paper);
+  border: 3px solid #fff;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 1px rgba(24, 32, 28, 0.12),
+    0 4px 8px rgba(5, 25, 17, 0.25);
+  transition:
+    translate 220ms var(--ease-spring),
+    box-shadow 220ms ease;
+}
+
+.stickers li:nth-child(odd) .sticker {
+  rotate: -8deg;
+}
+
+.stickers li:nth-child(even) .sticker {
+  rotate: 6deg;
+}
+
+.sticker:hover {
+  translate: 0 -3px;
+  box-shadow:
+    0 0 0 1px rgba(24, 32, 28, 0.12),
+    0 10px 16px rgba(5, 25, 17, 0.3);
+}
+
+.sticker svg {
+  width: 24px;
+  height: 24px;
+}
+
+.sticker .fill {
+  fill: currentColor;
+}
+
+.sticker .stroke {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+@media (min-width: 981px) {
+  .letter {
+    aspect-ratio: 1800 / 1231;
+    padding: 6% 8% 5% 13%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: url("../assets/images/desk/sketchbook-spiral.webp") center / 100% 100% no-repeat;
+    box-shadow: none;
+    filter: var(--drop-low);
+  }
 }
 
 .site-footer {
+  position: relative;
+  z-index: 2;
   padding: 32px 0 40px;
   color: var(--chalk-soft);
   font-size: 0.9rem;
@@ -1180,13 +1488,18 @@ a.project-folder:hover .project-sheet {
 }
 
 .case-media {
+  position: relative;
   margin-top: 48px;
   padding: 14px;
   background: var(--paper);
   box-shadow: var(--shadow-paper);
 }
 
-.case-media img,
+.case-media .tape {
+  top: -18px;
+}
+
+.case-media img:not(.tape),
 .case-media iframe,
 .case-media video {
   display: block;
@@ -1204,10 +1517,10 @@ a.project-folder:hover .project-sheet {
 }
 
 .case-gallery {
-  margin-top: 28px;
+  margin-top: 40px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  gap: 28px;
 }
 
 .case-gallery .case-media {
@@ -1257,6 +1570,12 @@ a.project-folder:hover .project-sheet {
 }
 
 /* Responsive */
+@media (max-width: 1199px) {
+  .chalk-note--contact {
+    display: none;
+  }
+}
+
 @media (max-width: 980px) {
   .hero {
     grid-template-columns: 1fr;
@@ -1270,16 +1589,22 @@ a.project-folder:hover .project-sheet {
     margin-inline: auto;
   }
 
+  .process-board {
+    padding-top: 0;
+  }
+
+  .process-arrows {
+    display: none;
+  }
+
   .process {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 36px;
   }
 
-  .project-folder--featured {
-    grid-template-columns: 1fr;
-  }
-
-  .project-folder--featured .project-sheet {
-    margin: 18px 18px 0;
+  .project-track {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 64px;
   }
 
   .teach {
@@ -1290,6 +1615,19 @@ a.project-folder:hover .project-sheet {
     max-width: 520px;
     width: 100%;
     margin-inline: auto;
+  }
+
+  .ruler-item:last-child {
+    padding-bottom: 0;
+  }
+
+  .cert {
+    position: relative;
+    top: auto;
+    right: auto;
+    grid-column: 2;
+    width: min(300px, 80%);
+    margin: 20px 0 0 52px;
   }
 
   .case-facts {
@@ -1310,7 +1648,8 @@ a.project-folder:hover .project-sheet {
     display: none;
   }
 
-  .container {
+  .container,
+  .project-viewport {
     width: calc(100% - 32px);
   }
 
@@ -1318,24 +1657,32 @@ a.project-folder:hover .project-sheet {
     left: 8px;
   }
 
-  .snote-link {
-    height: 29px;
+  .tape-link {
+    min-height: 38px;
+    padding: 4px 16px 2px;
+    font-size: 1.35rem;
   }
 
-  .snote-link+.snote-link {
-    margin-left: -12px;
-  }
-
-  .paper-butterfly--primary {
+  .tape-link--identity .tape-text {
     display: none;
   }
 
-  .snote-link--identity {
+  .desk-prop:not(.keep-mobile),
+  .chalk-note {
     display: none;
   }
 
-  .snote-label {
-    font-size: 0.74rem;
+  .prop-pencil {
+    bottom: 2%;
+    left: auto;
+    right: -40px;
+    width: 220px;
+  }
+
+  .prop-mug {
+    top: 10px;
+    right: -30px;
+    width: 120px;
   }
 
   .hero {
@@ -1346,8 +1693,12 @@ a.project-folder:hover .project-sheet {
     padding-inline: 12%;
   }
 
+  .paper-butterfly--primary {
+    display: none;
+  }
+
   .process,
-  .project-grid,
+  .project-track,
   .case-gallery {
     grid-template-columns: 1fr;
   }
@@ -1356,16 +1707,12 @@ a.project-folder:hover .project-sheet {
     min-height: 0;
   }
 
-  .process-note:nth-child(even) {
-    transform: rotate(1deg);
-  }
-
   .polaroids {
     min-height: 0;
     padding-top: 12px;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px 14px;
+    gap: 30px 14px;
   }
 
   .polaroids .polaroid {
@@ -1380,10 +1727,11 @@ a.project-folder:hover .project-sheet {
     width: 56%;
   }
 
-  .ruler::before {
+  .ruler-rail {
     left: 0;
-    width: 18px;
+    width: 20px;
   }
+
 
   .ruler-item {
     grid-template-columns: 1fr;
@@ -1396,6 +1744,11 @@ a.project-folder:hover .project-sheet {
   }
 
   .slip {
+    margin-left: 0;
+  }
+
+  .cert {
+    grid-column: 1;
     margin-left: 0;
   }
 
@@ -1419,7 +1772,9 @@ a.project-folder:hover .project-sheet {
 
   .site-header,
   .site-noise,
-  .paper-butterfly {
+  .paper-butterfly,
+  .desk-prop,
+  .chalk-note {
     display: none;
   }
 

@@ -13,8 +13,61 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setupNavigation(document.getElementById("siteHeader"));
 
-  if (!reducedMotion && window.gsap && window.ScrollTrigger) {
-    setupMotion(finePointer);
+  // Without GSAP or with reduced motion, the page stays as plain static HTML.
+  const { gsap, ScrollTrigger } = window;
+  if (reducedMotion || !gsap || !ScrollTrigger) return;
+
+  document.documentElement.classList.add("has-motion");
+  gsap.registerPlugin(
+    ...[
+      ScrollTrigger,
+      window.ScrollSmoother,
+      window.DrawSVGPlugin,
+      window.Draggable,
+      window.InertiaPlugin,
+    ].filter(Boolean),
+  );
+
+  const smoother =
+    window.ScrollSmoother && document.getElementById("smooth-wrapper")
+      ? window.ScrollSmoother.create({
+          wrapper: "#smooth-wrapper",
+          content: "#smooth-content",
+          smooth: 1.1,
+          effects: true,
+          smoothTouch: false,
+        })
+      : null;
+
+  setupAnchorLinks(smoother);
+  setupHeroMotion(gsap);
+  setupButterflyMotion(gsap);
+  setupProcessMotion(gsap);
+  setupProjectMotion(gsap);
+  setupTeachingMotion(gsap);
+  setupJourneyMotion(gsap);
+  setupContactMotion(gsap);
+  setupCaseMotion(gsap);
+
+  if (finePointer) {
+    setupFolderParallax(gsap);
+    setupDraggableProps(gsap);
+    setupMagneticButtons(gsap);
+  }
+
+  // Triggers were created per section, not in page order; sort so pin spacing
+  // from earlier sections is accounted for in later ones.
+  ScrollTrigger.sort();
+
+  const settle = () => {
+    ScrollTrigger.sort();
+    ScrollTrigger.refresh();
+    scrollToHash(smoother, window.location.hash, false);
+  };
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(settle);
+  } else {
+    window.addEventListener("load", settle);
   }
 });
 
@@ -74,37 +127,110 @@ function setupNavigation(siteHeader) {
   observedSections.forEach((section) => sectionObserver.observe(section));
 }
 
-// The one orchestrated moment: the folder lands on the mat, then the
-// butterflies take off as the visitor scrolls away from it.
-function setupMotion(finePointer) {
-  const { gsap, ScrollTrigger } = window;
-  gsap.registerPlugin(ScrollTrigger);
+// ScrollSmoother moves the content with transforms, so in-page links have to
+// go through it instead of the browser's native jump.
+function setupAnchorLinks(smoother) {
+  if (!smoother) return;
 
-  gsap
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const hash = link.getAttribute("href");
+      if (!scrollToHash(smoother, hash, true)) return;
+      event.preventDefault();
+      window.history.pushState(null, "", hash);
+    });
+  });
+}
+
+function scrollToHash(smoother, hash, smooth) {
+  if (!smoother || !hash || hash === "#") return false;
+
+  let target;
+  try {
+    target = document.querySelector(decodeURIComponent(hash));
+  } catch {
+    return false;
+  }
+  if (!target) return false;
+
+  smoother.scrollTo(target, smooth, "top 80px");
+  return true;
+}
+
+// Chalk strokes draw themselves; the handwritten label is written on the mat
+// already, so it stays put.
+function drawChalk(gsap, container) {
+  const tl = gsap.timeline();
+  const strokes = container?.querySelectorAll(".chalk");
+  if (window.DrawSVGPlugin && strokes?.length) {
+    tl.from(strokes, {
+      drawSVG: 0,
+      duration: 0.6,
+      stagger: 0.2,
+      ease: "power1.inOut",
+    });
+  }
+  return tl;
+}
+
+// Nothing on a desk appears out of thin air. Objects are pushed in from past
+// the edge of the screen, so these return a start offset just off-screen.
+const offRight = (el) => () =>
+  window.innerWidth - el.getBoundingClientRect().left + 60;
+const offLeft = (el) => () => -(el.getBoundingClientRect().right + 60);
+
+// Pushed onto the desk from one side, with a little spin, as a scroll reveal.
+function slideOnto(gsap, el, side, vars = {}) {
+  if (!el) return;
+  gsap.from(el, {
+    x: side === "left" ? offLeft(el) : offRight(el),
+    rotation: side === "left" ? -12 : 12,
+    duration: 0.9,
+    ease: "power3.out",
+    scrollTrigger: { trigger: el, start: "top 88%", once: true },
+    ...vars,
+  });
+}
+
+function setupHeroMotion(gsap) {
+  const folder = document.querySelector(".folder-asset");
+  if (!folder) return;
+
+  const pencil = document.querySelector(".prop-pencil");
+  const eraser = document.querySelector(".prop-eraser");
+
+  // The folder slides in from the right edge, then the files rise out of it.
+  const tl = gsap
     .timeline({ defaults: { ease: "power3.out" } })
-    .from(".hero-copy > *", {
-      y: 24,
-      autoAlpha: 0,
-      stagger: 0.08,
-      duration: 0.7,
-      clearProps: "all",
-    })
-    .from(
-      ".folder-asset",
-      { y: -60, rotation: -4, scale: 1.06, autoAlpha: 0, duration: 0.9 },
-      0.1,
-    )
+    .from(folder, { x: offRight(folder), rotation: 14, duration: 1.1 })
     .from(
       ".file-interactive",
-      { y: 50, autoAlpha: 0, stagger: 0.09, duration: 0.6, clearProps: "all" },
-      0.55,
+      { y: 60, stagger: 0.09, duration: 0.6, clearProps: "transform" },
+      0.75,
     );
 
-  setupButterflyMotion(gsap);
-
-  if (finePointer) {
-    setupFolderParallax(gsap);
+  if (pencil) {
+    tl.from(pencil, { x: offLeft(pencil), rotation: -70, duration: 1 }, 0.3);
   }
+  if (eraser) {
+    tl.from(eraser, { x: offRight(eraser), rotation: 120, duration: 1 }, 0.45);
+  }
+  tl.add(drawChalk(gsap, document.querySelector(".chalk-note--hero")), 1.2);
+
+  // On wide screens the hero holds briefly while the files lift out further.
+  gsap.matchMedia().add("(min-width: 981px)", () => {
+    gsap.to(".folder-files-layer", {
+      yPercent: -14,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "+=300",
+        pin: true,
+        scrub: 0.6,
+      },
+    });
+  });
 }
 
 function setupButterflyMotion(gsap) {
@@ -181,7 +307,7 @@ function setupButterflyMotion(gsap) {
       scrollTrigger: {
         trigger: hero,
         start: "top top",
-        end: "top -350px",
+        end: "+=350",
         scrub: 0.3,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
@@ -202,6 +328,7 @@ function setupButterflyMotion(gsap) {
         .to(rightWing, { rotationY: 10, duration: 0.07, ease: "power1.out" }, pos + 0.05);
     });
 
+    // They fly off past the edge of the hero rather than fading out.
     flight
       .to(
         butterfly,
@@ -214,21 +341,215 @@ function setupButterflyMotion(gsap) {
         },
         0,
       )
-      .to(shadow, { autoAlpha: 0, scale: 0.1, duration: 0.18 }, 0)
+      .to(shadow, { scale: 0.1, duration: 0.18 }, 0)
       .to(
         butterfly,
         {
           x: () => hero.clientWidth * config.exitX - butterfly.offsetLeft,
           y: () => hero.clientHeight * config.exitY - butterfly.offsetTop,
           rotation: config.exitRotation,
-          scale: config.scale * 0.35,
-          autoAlpha: 0,
+          scale: config.scale * 0.6,
           duration: 0.78,
           ease: "power2.in",
         },
         0.22,
       );
   });
+}
+
+function setupProcessMotion(gsap) {
+  const section = document.getElementById("proses");
+  if (!section) return;
+
+  const notes = gsap.utils.toArray(".process-note");
+  const strokes = gsap.utils.toArray(".process-arrows .chalk");
+  const mm = gsap.matchMedia();
+
+  // Wide screens: the board pins and the notes are dealt onto it one by one,
+  // each pinned down before the next arrives.
+  mm.add("(min-width: 981px)", () => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: () =>
+          section.offsetHeight > window.innerHeight
+            ? "bottom bottom"
+            : "center center",
+        end: "+=900",
+        pin: true,
+        scrub: 0.8,
+        invalidateOnRefresh: true,
+      },
+    });
+
+    notes.forEach((note, i) => {
+      const at = i * 1.1;
+      tl.from(
+        note,
+        {
+          x: offRight(note),
+          rotation: gsap.utils.random(8, 20),
+          duration: 1,
+          ease: "power2.out",
+        },
+        at,
+      ).from(
+        note.querySelector(".pin"),
+        { y: -20, scale: 1.3, duration: 0.3, ease: "power2.in" },
+        at + 0.8,
+      );
+
+      const arrow = strokes.slice(i * 2, i * 2 + 2);
+      if (window.DrawSVGPlugin && arrow.length) {
+        tl.from(arrow, { drawSVG: 0, duration: 0.5, stagger: 0.25 }, at + 0.9);
+      }
+    });
+  });
+
+  mm.add("(max-width: 980px)", () => {
+    notes.forEach((note, i) => slideOnto(gsap, note, i % 2 ? "right" : "left"));
+  });
+}
+
+function setupProjectMotion(gsap) {
+  const section = document.getElementById("proyek");
+  const track = section?.querySelector(".project-track");
+  if (!track) return;
+
+  const cards = gsap.utils.toArray(".project-card");
+  const mm = gsap.matchMedia();
+
+  // Wide screens: the section pins and the sheets slide across the desk.
+  mm.add("(min-width: 981px)", () => {
+    const distance = () => Math.max(0, track.scrollWidth - window.innerWidth);
+
+    const slide = gsap.to(track, {
+      x: () => -distance(),
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: () => `+=${distance() + window.innerHeight * 0.15}`,
+        pin: true,
+        scrub: 0.8,
+        invalidateOnRefresh: true,
+      },
+    });
+
+    // Each binder clip snaps shut as its sheet reaches the middle of the desk.
+    cards.forEach((card) => {
+      gsap.from(card.querySelector(".binder-clip"), {
+        y: -14,
+        scale: 1.25,
+        rotation: -12,
+        duration: 0.35,
+        ease: "back.out(3)",
+        scrollTrigger: {
+          trigger: card,
+          containerAnimation: slide,
+          start: "left 70%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    });
+  });
+
+  mm.add("(max-width: 980px)", () => {
+    cards.forEach((card, i) => slideOnto(gsap, card, i % 2 ? "right" : "left"));
+  });
+}
+
+function setupTeachingMotion(gsap) {
+  const card = document.querySelector(".index-card");
+  const polaroids = gsap.utils.toArray(".polaroid");
+  if (!card && !polaroids.length) return;
+
+  const tl = gsap.timeline({
+    defaults: { ease: "power3.out" },
+    scrollTrigger: { trigger: "#mengajar", start: "top 65%", once: true },
+  });
+
+  if (card) {
+    tl.from(card, { x: offLeft(card), rotation: -10, duration: 0.9 });
+  }
+
+  // Photos are tossed in from the top-right, then the tape is pulled across.
+  polaroids.forEach((photo, i) => {
+    tl.from(
+      photo,
+      {
+        x: offRight(photo),
+        y: -160,
+        rotation: gsap.utils.random(20, 40),
+        duration: 0.9,
+      },
+      0.15 + i * 0.18,
+    ).from(
+      photo.querySelector(".tape"),
+      { scaleX: 0.3, transformOrigin: "left center", duration: 0.3 },
+      0.9 + i * 0.18,
+    );
+  });
+}
+
+function setupJourneyMotion(gsap) {
+  gsap.utils.toArray(".slip").forEach((slip) => slideOnto(gsap, slip, "right"));
+  slideOnto(gsap, document.querySelector(".cert"), "right", { rotation: 30 });
+}
+
+function setupContactMotion(gsap) {
+  const letter = document.querySelector(".letter");
+  if (!letter) return;
+
+  // The sketchbook is slid up from the bottom edge, then clipped down. The
+  // trigger is the section, since the letter itself starts a screen lower.
+  gsap
+    .timeline({
+      defaults: { ease: "power3.out" },
+      scrollTrigger: { trigger: "#kontak", start: "top 70%", once: true },
+    })
+    .from(letter, {
+      y: () => window.innerHeight,
+      rotation: 8,
+      duration: 1,
+    })
+    .from(
+      letter.querySelector(".letter-clip"),
+      { y: -16, scale: 1.25, duration: 0.35, ease: "back.out(3)" },
+      0.85,
+    )
+    .add(drawChalk(gsap, document.querySelector(".chalk-note--contact")), 0.9);
+
+  // The paper ball rolls in from the right.
+  const ball = document.querySelector(".prop-paperball");
+  if (ball) {
+    gsap.from(ball, {
+      x: offRight(ball),
+      rotation: -540,
+      duration: 1.2,
+      ease: "power2.out",
+      scrollTrigger: { trigger: ball, start: "top 95%", once: true },
+    });
+  }
+}
+
+function setupCaseMotion(gsap) {
+  if (!document.querySelector(".case")) return;
+
+  // Fact cards are dealt in on load, alternating sides.
+  gsap.utils.toArray(".case-facts > div").forEach((fact, i) => {
+    gsap.from(fact, {
+      x: i % 2 ? offRight(fact) : offLeft(fact),
+      rotation: i % 2 ? 12 : -12,
+      duration: 0.9,
+      delay: i * 0.08,
+      ease: "power3.out",
+    });
+  });
+
+  gsap.utils.toArray(".case-media, .case-story").forEach((block, i) =>
+    slideOnto(gsap, block, i % 2 ? "left" : "right"),
+  );
 }
 
 function setupFolderParallax(gsap) {
@@ -248,5 +569,46 @@ function setupFolderParallax(gsap) {
   stage.addEventListener("pointerleave", () => {
     rotateX(0);
     rotateY(0);
+  });
+}
+
+// Pencils, erasers and paper balls can be pushed around the desk.
+function setupDraggableProps(gsap) {
+  const { Draggable } = window;
+  const props = gsap.utils.toArray(".desk-prop--drag");
+  if (!Draggable || !props.length) return;
+
+  document.documentElement.classList.add("has-drag");
+
+  props.forEach((prop) => {
+    Draggable.create(prop, {
+      type: "x,y",
+      bounds: prop.closest("section"),
+      inertia: Boolean(window.InertiaPlugin),
+      onPress() {
+        gsap.to(prop, { scale: 1.08, duration: 0.2 });
+      },
+      onRelease() {
+        gsap.to(prop, { scale: 1, duration: 0.35, ease: "back.out(2)" });
+      },
+    });
+  });
+}
+
+function setupMagneticButtons(gsap) {
+  gsap.utils.toArray(".button--primary").forEach((button) => {
+    const moveX = gsap.quickTo(button, "x", { duration: 0.4, ease: "power3.out" });
+    const moveY = gsap.quickTo(button, "y", { duration: 0.4, ease: "power3.out" });
+
+    button.addEventListener("pointermove", (event) => {
+      const bounds = button.getBoundingClientRect();
+      moveX((event.clientX - bounds.left - bounds.width / 2) * 0.25);
+      moveY((event.clientY - bounds.top - bounds.height / 2) * 0.35);
+    });
+
+    button.addEventListener("pointerleave", () => {
+      moveX(0);
+      moveY(0);
+    });
   });
 }

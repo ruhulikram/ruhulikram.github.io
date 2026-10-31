@@ -1,0 +1,366 @@
+{
+  "meta": {
+    "siteTitle": "Ruhul Ikram | Product Developer & Educator",
+    "metaDescription": "Portofolio Ruhul Ikram, product developer dan pengajar dari Bogor. Membangun produk digital dengan bantuan AI, dari analisa sampai rilis.",
+    "ogDescription": "Saya membangun produk digital dengan bantuan AI, dan mengajarkan cara membuatnya.",
+    "canonicalBase": "https://ruhulikram.github.io/porto-ruhul/",
+    "ogImage": "assets/images/projects/ruhul-os.jpg",
+    "location": "Bogor, Indonesia"
+  },
+  "sections": {
+    "proses": true,
+    "proyek": true,
+    "mengajar": true,
+    "perjalanan": true,
+    "kontak": true
+  },
+  "hero": {
+    "name": "Ruhul Ikram",
+    "role": "Product Developer & Educator",
+    "lead": "Saya membangun produk digital dengan bantuan AI, dari analisa, menulis kode, sampai pengujian, dan mengajarkan cara membuatnya.",
+    "primaryBtn": {
+      "label": "Lihat LinkedIn",
+      "url": "https://www.linkedin.com/in/ruhul-ikram/",
+      "external": true
+    },
+    "secondaryBtn": {
+      "label": "Buka proyek",
+      "url": "#proyek",
+      "external": false
+    },
+    "chalkNote": "buka salah satu berkas",
+    "folderLabelLine1": "Portofolio",
+    "folderLabelLine2": "Bogor, 2026",
+    "stamp": {
+      "src": "assets/images/folder-ui/stamp.webp",
+      "alt": "Foto Ruhul Ikram",
+      "width": 262,
+      "height": 299
+    },
+    "cv": {
+      "enabled": true,
+      "label": "Unduh CV (PDF)",
+      "path": "assets/cv/Ruhul-Ikram-CV.pdf"
+    }
+  },
+  "process": {
+    "title": "Dari masalah sampai rilis",
+    "description": "Saya tidak berhenti di menulis kode. Saya ikut menganalisa kebutuhan, memimpin tim kecil, dan memastikan produknya benar-benar jalan. AI mempercepat pekerjaan saya, keputusan tetap di tangan saya.",
+    "steps": [
+      {
+        "id": "step-1",
+        "title": "Analisa",
+        "text": "Bicara dengan pengguna, memetakan masalah, menentukan apa yang perlu dibangun lebih dulu.",
+        "color": "yellow",
+        "active": true
+      },
+      {
+        "id": "step-2",
+        "title": "Rancang & bangun",
+        "text": "Mendesain alur, lalu menulis kode bersama AI agar prototipe cepat sampai ke tangan pengguna.",
+        "color": "green",
+        "active": true
+      },
+      {
+        "id": "step-3",
+        "title": "Uji",
+        "text": "Menguji fitur, mencari bug, dan memastikan hasilnya bekerja di perangkat nyata.",
+        "color": "coral",
+        "active": true
+      },
+      {
+        "id": "step-4",
+        "title": "Rilis & pimpin",
+        "text": "Mengatur pembagian kerja tim, merilis, lalu belajar dari data dan masukan pengguna.",
+        "color": "lavender",
+        "active": true
+      }
+    ]
+  },
+  "projects": {
+    "title": "Proyek",
+    "description": "Setiap map berisi cerita lengkapnya: masalah, proses, video, dan hasilnya.",
+    "items": [
+      {
+        "id": "proj-ruhul-os",
+        "slug": "ruhul-os",
+        "active": true,
+        "status": "completed",
+        "statusBadge": "",
+        "progress": 100,
+        "showProgress": false,
+        "kind": "Web, 2026",
+        "title": "Ruhul OS",
+        "summary": "Portofolio ini sendiri: meja kerja interaktif yang dibangun tanpa framework.",
+        "tags": ["HTML", "CSS", "GSAP"],
+        "openLabel": "Buka studi kasus",
+        "emptyLabel": "Mockup menyusul",
+        "image": {
+          "src": "assets/images/projects/ruhul-os.jpg",
+          "alt": "Tampilan beranda portofolio Ruhul Ikram",
+          "width": 1440,
+          "height": 900
+        },
+        "linkType": "case-study",
+        "externalUrl": "",
+        "caseStudy": {
+          "metaDescription": "Studi kasus Ruhul OS: portofolio berbentuk meja kerja interaktif, dibangun tanpa framework.",
+          "lead": "Portofolio yang dibuat seperti meja kerja: map, berkas, sticky note, dan kupu-kupu kertas di atas cutting mat. Dibangun tanpa framework supaya ringan dan mudah dirawat.",
+          "facts": [
+            { "label": "Peran", "value": "Desain, pengembangan, pengujian" },
+            { "label": "Tahun", "value": "2026" },
+            { "label": "Teknologi", "value": "HTML, CSS, JavaScript, GSAP" },
+            { "label": "Bantuan AI", "value": "Claude untuk refactor dan review kode" }
+          ],
+          "videoEmbedUrl": "",
+          "mainMedia": {
+            "src": "assets/images/projects/ruhul-os.jpg",
+            "alt": "Beranda Ruhul OS dengan map interaktif di atas cutting mat",
+            "width": 1440,
+            "height": 900,
+            "caption": "Beranda: map berisi berkas yang membuka setiap bagian portofolio."
+          },
+          "gallery": [
+            {
+              "src": "assets/images/projects/photo-utama.webp",
+              "alt": "Ilustrasi karakter karya Ruhul Ikram",
+              "width": 1200,
+              "height": 1200,
+              "caption": "Aset ilustrasi digambar sendiri.",
+              "tape": "tape-yellow-strip.webp"
+            },
+            {
+              "src": "assets/images/folder-ui/folder-front.webp",
+              "alt": "Aset map yang dipakai di beranda",
+              "width": 892,
+              "height": 626,
+              "caption": "Aset map dibuat berlapis supaya berkas bisa keluar-masuk.",
+              "tape": "tape-kraft-folded.webp"
+            }
+          ],
+          "problem": "Portofolio developer biasanya terlihat sama: daftar skill, grid kartu, tombol kontak. Saya ingin pengunjung penasaran dan mau menjelajah, tanpa mengorbankan kecepatan dan aksesibilitas.",
+          "processSteps": [
+            "Menentukan satu tema, meja kerja di atas cutting mat, supaya setiap bagian terasa satu dunia.",
+            "Mengumpulkan objek meja nyata (pensil, selotip, klip, sketchbook) sebagai aset berlapis.",
+            "Menulis HTML semantik dan CSS tanpa framework, lalu menambahkan GSAP untuk smooth scroll, pin, dan animasi per bagian.",
+            "Menguji di desktop dan mobile, termasuk mode reduced motion yang mematikan semua animasi."
+          ],
+          "result": "Situs statis tanpa build step yang bisa langsung di-host di GitHub Pages, dan tetap berfungsi penuh walau animasi dimatikan.",
+          "primaryAction": {
+            "label": "Lihat kode di GitHub",
+            "url": "https://github.com/ruhulikram/porto-ruhul"
+          },
+          "secondaryAction": {
+            "label": "Hubungi saya",
+            "url": "../index.html#kontak"
+          }
+        }
+      },
+      {
+        "id": "proj-next-1",
+        "slug": "edtech-next",
+        "active": true,
+        "status": "upcoming",
+        "statusBadge": "",
+        "progress": 0,
+        "showProgress": false,
+        "kind": "Ed-tech",
+        "title": "Proyek berikutnya",
+        "summary": "Studi kasus sedang disiapkan.",
+        "tags": [],
+        "openLabel": "Segera",
+        "emptyLabel": "Mockup menyusul",
+        "image": {
+          "src": "",
+          "alt": "",
+          "width": 1440,
+          "height": 900
+        },
+        "linkType": "none",
+        "externalUrl": "",
+        "caseStudy": null
+      },
+      {
+        "id": "proj-next-2",
+        "slug": "produk-next",
+        "active": true,
+        "status": "upcoming",
+        "statusBadge": "",
+        "progress": 0,
+        "showProgress": false,
+        "kind": "Produk",
+        "title": "Proyek berikutnya",
+        "summary": "Studi kasus sedang disiapkan.",
+        "tags": [],
+        "openLabel": "Segera",
+        "emptyLabel": "Mockup menyusul",
+        "image": {
+          "src": "",
+          "alt": "",
+          "width": 1440,
+          "height": 900
+        },
+        "linkType": "none",
+        "externalUrl": "",
+        "caseStudy": null
+      }
+    ]
+  },
+  "teaching": {
+    "title": "Mengajar & mentoring",
+    "description": "Mengajar membuat saya terbiasa menjelaskan hal rumit dengan sederhana. Kemampuan itu sekarang saya bawa ke produk ed-tech dan ke tim yang saya pimpin.",
+    "activities": [
+      {
+        "id": "teach-1",
+        "title": "Guru Simulasi Digital",
+        "subtitle": "SMK YASTRIF 2, 2023",
+        "isPlaceholder": false,
+        "active": true
+      },
+      {
+        "id": "teach-2",
+        "title": "Gambar Teknik Otomotif",
+        "subtitle": "SMK YASTRIF 2, 2023",
+        "isPlaceholder": false,
+        "active": true
+      },
+      {
+        "id": "teach-3",
+        "title": "Kegiatan mentoring",
+        "subtitle": "Tempat, tahun",
+        "isPlaceholder": true,
+        "active": true
+      }
+    ],
+    "polaroids": [
+      {
+        "id": "pol-1",
+        "src": "",
+        "alt": "Kegiatan di kelas",
+        "width": 800,
+        "height": 800,
+        "caption": "Di kelas",
+        "tape": "tape-kraft-flat.webp",
+        "active": true
+      },
+      {
+        "id": "pol-2",
+        "src": "",
+        "alt": "Sesi mentoring",
+        "width": 800,
+        "height": 800,
+        "caption": "Sesi mentoring",
+        "tape": "tape-yellow-strip.webp",
+        "active": true
+      },
+      {
+        "id": "pol-3",
+        "src": "",
+        "alt": "Kegiatan workshop",
+        "width": 800,
+        "height": 800,
+        "caption": "Workshop",
+        "tape": "tape-kraft-folded.webp",
+        "active": true
+      }
+    ]
+  },
+  "journey": {
+    "title": "Perjalanan",
+    "description": "Jalan saya tidak lurus: kelas, ruang redaksi, lalu produk. Masing-masing mengasah cara saya bekerja.",
+    "items": [
+      {
+        "id": "jour-1",
+        "datetime": "2026-03",
+        "period": "2026 – sekarang",
+        "role": "Social Media Manager",
+        "org": "Sekolah Prestasi Global, Depok",
+        "description": "Menyusun strategi konten dan sistem publikasi untuk brand sekolah.",
+        "active": true
+      },
+      {
+        "id": "jour-2",
+        "datetime": "2023-09",
+        "period": "2023 – 2026",
+        "role": "Content Editor",
+        "org": "MileniaNews, Jakarta Selatan",
+        "description": "Menyunting berita, mendesain konten sosial, dan sempat menjadi host podcast.",
+        "active": true
+      },
+      {
+        "id": "jour-3",
+        "datetime": "2023-07",
+        "period": "2023",
+        "role": "Guru SMK",
+        "org": "SMK YASTRIF 2",
+        "description": "Mengajar simulasi digital dan gambar teknik, menyusun RPP, dan mengevaluasi siswa.",
+        "active": true
+      },
+      {
+        "id": "jour-4",
+        "datetime": "2022-09",
+        "period": "2022 – 2026",
+        "role": "S1 Teknologi Informasi",
+        "org": "Universitas Bina Sarana Informatika",
+        "description": "Fokus pada pengembangan software, analisa program, dan web.",
+        "active": true
+      }
+    ],
+    "certifications": {
+      "enabled": true,
+      "title": "Sertifikasi",
+      "items": [
+        "MTCNA, MikroTik",
+        "PCAP, Python",
+        "Kompetensi Analis Program"
+      ]
+    }
+  },
+  "contact": {
+    "title": "Punya ide produk atau kelas yang ingin dibangun?",
+    "description": "Cara paling cepat menghubungi saya lewat LinkedIn atau email.",
+    "chalkNote": "mulai dari sini",
+    "linkedinLabel": "Kirim pesan di LinkedIn",
+    "linkedinUrl": "https://www.linkedin.com/in/ruhul-ikram/",
+    "emailLabel": "Email saya",
+    "emailAddress": "ikramruhul@gmail.com",
+    "socials": [
+      {
+        "id": "soc-github",
+        "platform": "github",
+        "label": "GitHub",
+        "url": "https://github.com/ruhulikram",
+        "active": true
+      },
+      {
+        "id": "soc-instagram",
+        "platform": "instagram",
+        "label": "Instagram",
+        "url": "https://instagram.com/USERNAME",
+        "active": false
+      },
+      {
+        "id": "soc-tiktok",
+        "platform": "tiktok",
+        "label": "TikTok",
+        "url": "https://tiktok.com/@USERNAME",
+        "active": false
+      },
+      {
+        "id": "soc-linkedin",
+        "platform": "linkedin",
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/ruhul-ikram/",
+        "active": false
+      },
+      {
+        "id": "soc-youtube",
+        "platform": "youtube",
+        "label": "YouTube",
+        "url": "https://youtube.com/@USERNAME",
+        "active": false
+      }
+    ]
+  }
+}
+

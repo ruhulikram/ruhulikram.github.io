@@ -1,9 +1,11 @@
 # Private local notes
 more.txt
 
+# Raw unoptimized source PNGs (runtime uses assets/images/desk/*.webp)
+assets/desk/
+
 # Operating system and editor files
 .DS_Store
 Thumbs.db
 *.log
 style_dump.json
-
