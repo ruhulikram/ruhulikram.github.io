@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   setupNavigation(document.getElementById("siteHeader"));
+  setupStealthEntry();
 
   // Without GSAP or with reduced motion, the page stays as plain static HTML.
   const { gsap, ScrollTrigger } = window;
@@ -610,5 +611,35 @@ function setupMagneticButtons(gsap) {
       moveX(0);
       moveY(0);
     });
+  });
+}
+
+function setupStealthEntry() {
+  let clicks = 0;
+  let timer = null;
+  const trigger = document.getElementById("mainFolder");
+  const go = () => {
+    window.location.href = "404.html#unlock";
+  };
+
+  trigger?.addEventListener("click", (e) => {
+    if (e.target.closest("a")) return;
+    clicks++;
+    clearTimeout(timer);
+    if (clicks >= 5) {
+      clicks = 0;
+      go();
+    } else {
+      timer = setTimeout(() => {
+        clicks = 0;
+      }, 2200);
+    }
+  });
+
+  window.addEventListener("keydown", (e) => {
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "l") {
+      e.preventDefault();
+      go();
+    }
   });
 }

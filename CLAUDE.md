@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Static portfolio for Ruhul Ikram, a product developer and educator. The copy is in Indonesian (`lang="id"`). It deploys to GitHub Pages from the repo root at `https://ruhulikram.github.io/porto-ruhul/`.
+Static portfolio for Ruhul Ikram, a product developer and educator. The copy is in Indonesian (`lang="id"`). It deploys to GitHub Pages from the repo root at `https://ruhulikram.github.io/`.
 
 ## Stack
 
@@ -8,14 +8,15 @@ Static portfolio for Ruhul Ikram, a product developer and educator. The copy is 
 - GSAP 3.13.0 from jsDelivr (`defer`). Every plugin has been free since 3.13, and these are used: ScrollTrigger, ScrollSmoother, DrawSVGPlugin, Draggable, InertiaPlugin. Case pages load only gsap + ScrollTrigger + ScrollSmoother.
 - Fonts: self-hosted Geist (`assets/fonts/geist-latin.woff2`, OFL) for everything, and Nanum Pen Script from Google Fonts (`--hand`) only for handwritten bits: tape nav labels, chalk notes, captions, and the certificate.
 
-## Preview & Desk Studio (CMS)
+## Preview & Stealth Desk Studio (CMS)
 
 ```powershell
 python -m http.server 4173 --bind 127.0.0.1
 ```
 
-- `admin.html` (`js/admin.js`, `css/admin.css`): Visual admin panel for GitHub Pages to edit all copy, toggle sections/items active or inactive, add completed or ongoing projects (`.project-card.is-ongoing` with `.project-badge` and `.project-progress`), upload photos (auto-converted to `.webp` quality 82 via `<canvas>`), and manage social stickers.
-- `data/portfolio.json` is the structured state source. Clicking **Simpan & Publish** in `admin.html` bakes pure static HTML directly into `index.html`, `projects/<slug>.html`, and `sitemap.xml` and pushes a single atomic commit to GitHub Pages via the GitHub REST API.
+- `404.html` (`js/desk-404.js`): Disguised as a standard cutting-mat 404 page by default. Unlocking via 5 rapid clicks on the `404` heading (or 5 clicks on `#mainFolder` in `index.html`, or pressing `Ctrl + Shift + L`) opens a PIN/Token modal secured with Web Crypto API (`PBKDF2` + `AES-256-GCM`) and mandatory `@ruhulikram` GitHub owner verification.
+- Once unlocked, `js/desk-404.js` mounts the visual Desk Studio to edit all copy, toggle sections/items active or inactive, add completed or ongoing projects (`.project-card.is-ongoing` with `.project-badge` and `.project-progress`), upload photos (auto-converted to `.webp` quality 82 via `<canvas>`), and manage social stickers.
+- `data/portfolio.json` is the structured state source. Clicking **Publish ke GitHub Pages** bakes pure static HTML directly into `index.html`, `projects/<slug>.html`, and `sitemap.xml` and pushes a single atomic commit to GitHub Pages via the GitHub REST API.
 
 ## Design rule: one theme
 
